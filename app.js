@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+const mysql = require("./Database/connect");
+
+
 app.get('/', (req, res) => res.send("Hello youtube"));
 
 app.listen(3000, () =>{
