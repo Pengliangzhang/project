@@ -3,20 +3,21 @@ const app = express();
 const _ = require("lodash");
 const bodyParser = require("body-parser");
 
-var tools = require("./Database/connect.js");
+var insertUSER = require("./Database/user.js");
 // const user = require("./Database/Client");
 
-// configuration for app
+// configuration for app to allow json format
 app.use(bodyParser.json());
+
+// set up router
 app.get('/', (req, res) =>{
     console.log("Established a connection !");
     res.send("Hello youtube")
 });
 
 app.post('/login.js', (req, res) =>{
-
     var body = _.pick(req.body,["ps", "username", "email"]);
-    var response = tools.print(body);
+    var response = insertUSER.insert(body);
     res.end("Thanks !")
 });
 
