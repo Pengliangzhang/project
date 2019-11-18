@@ -1,21 +1,21 @@
 var mysql = require('mysql');
+const config = require("./config");
 
-var connection = mysql.createConnection({
-    host     : "project-datebase.c2sslqw871wc.us-west-1.rds.amazonaws.com",
-    user     : "admin",
-    password : "12345678",
-    port     : 3306
-  });
-  
+var connection = mysql.createConnection(config.db);
+
+var parserUser = function(body) {
+  console.log(body);
   connection.connect(function(err) {
     if (err) {
       console.error('Database connection failed: ' + err.stack);
-      return;
-    }
-  
+      return 0;
+    }  
     console.log('Connected to database.');
-  });
+  });  
+}
   
-  connection.end();
 
-exports.module = {mysql}
+
+module.exports = {
+  print: parserUser
+}
