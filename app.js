@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const _ = require("lodash");
 const bodyParser = require("body-parser");
+const deasync = require("deasync")
 
-var insertUSER = require("./Database/user.js");
+var USER = require("./Database/user.js");
 // const user = require("./Database/Client");
 
 // configuration for app to allow json format
@@ -15,9 +16,19 @@ app.get('/', (req, res) =>{
     res.send("Hello youtube")
 });
 
-app.post('/login.js', (req, res) =>{
+app.post('/login', (req, res) =>{
+    var body = _.pick(req.body,["username", "ps"]);
+
+    var response = USER.compare(body);
+    while(response == undefined) {
+        require('deasync').runLoopOnce();
+    }
+    res.end("Thanks ! " + response);  
+});
+
+app.post('/signup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
-    var response = insertUSER.insert(body);
+    var response = USER.insert(body);
     res.end("Thanks !")
 });
 
