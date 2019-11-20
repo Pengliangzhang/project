@@ -45,20 +45,27 @@ var parserUser = function(body) {
     }
   });
   // insert an user row
+  var duplicate;
   connection.query(insertDATA, (err, result)=>{
     if(err){
       console.log(err);
-      throw err;
+      duplicate = 1;
+      return;
     }
+    duplicate = 0;
   });
+  while(duplicate == undefined) {
+    require('deasync').runLoopOnce();
+  }
   // insert an PASS row
-  connection.query(insertPASS, (err, result)=>{
-    if(err){
-      console.log(err);
-      throw err;
-    }
-  });
-  connection.end();
+  if(duplicate==0){
+    connection.query(insertPASS, (err, result)=>{
+      if(err){
+        console.log(err);
+        return;
+      }
+    });
+  }
 }
 
 var comparePASS = function(body) {

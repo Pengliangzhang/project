@@ -32,6 +32,18 @@ app.post('/signup', (req, res) =>{
     res.end("Thanks !")
 });
 
+app.post('/tickets', (req, res) =>{
+    var body = _.pick(req.body,["ps", "username", "email"]);
+    var response = USER.insert(body);
+    res.end("Thanks !")
+});
+
+app.post('/payment', (req, res) =>{
+    var body = _.pick(req.body,["ps", "username", "email"]);
+    var response = USER.insert(body);
+    res.end("Thanks !")
+});
+
 
 // establish HTTP connection
 app.listen(3000, () =>{
