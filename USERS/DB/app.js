@@ -2,34 +2,78 @@ const express = require("express");
 const app = express();
 const _ = require("lodash");
 const bodyParser = require("body-parser");
-const deasync = require("deasync")
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const path = require("path");
+var responseClient = require('./Public/util').responseClient;
 
-var USER = require("./Database/user.js");
-// const user = require("./Database/Client");
+// set up cookie for login
+app.use(cookieParser('express_react_cookie'));
+app.use(session({
+    secret:'express_react_cookie',
+    resave:true,
+    saveUninitialized:true,
+    cookie:{maxAge: 60 * 1000 * 30} //30 mins for session expired
+}))
+
+app.use('/',express.static(path.join(__dirname,"..",'public')));
 
 // configuration for app to allow json format
 app.use(bodyParser.json());
 
+// database configration 
+var USER = require("./Database/user.js");
+
 // set up router
 app.get('/', (req, res) =>{
     console.log("Established a connection !");
-    res.send("Hello youtube")
+    res.send("Hello youtube");
+    
 });
 
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
+    if(!body.username){
+        responseClient(res, 400, 0, "user name cannot be none!");
+    }
+
+    if(!body.ps){
+        responseClient(res, 400, 0, "password cannot be none!");
+    }
 
     var response = USER.compare(body);
-    while(response == undefined) {
-        require('deasync').runLoopOnce();
+    if(response.result==-1){
+        responseClient(res, 400, 0, "User does not exist !");
     }
-    res.end("Thanks ! " + response);  
+    else if(response.result==1){
+        req.session.userInfo = response.user;
+        responseClient(res, 200, 1, "Thanks for loging in !");
+    }else{
+        responseClient(res, 400, 0, "User name or password do not exist !");
+    }
 });
+
+app.get('/userInfo', (req, res)=>{
+    if(req.session.userInfo){
+        responseClient(res, 200, 1, req.session.userInfo);
+    }else{
+        responseClient(res, 400, 0, "Please login !");
+    }
+})
+
+app.get('/logout', (req, res)=>{
+    req.session.userInfo = undefined;
+    responseClient(res, 400, 1, "Please login !");
+})
 
 app.post('/signup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
     var response = USER.insert(body);
-    res.end("Thanks !")
+    if(response.res==0){
+        responseClient(res, 400, response.res, `Username: ${body.username} exist, please choose another one !`); 
+    }else{
+        responseClient(res, 200, response.res, "Thanks for signup !");
+    }
 });
 
 app.post('/tickets', (req, res) =>{
