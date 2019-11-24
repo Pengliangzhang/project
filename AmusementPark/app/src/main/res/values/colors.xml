@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#185C77</color>
+    <color name="colorPrimaryDark">#185C77</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="app_name_color">#FCA96A</color>
+    <color name="sienna">#B3885C</color>
+    <color name="yellow">#F8D9AA</color>
+    <color name="indigo">#1D6982</color>
+    <color name="cyan">#C7E3F0</color>
+    <color name="indigo_top">#185C77</color>
+
+</resources>
