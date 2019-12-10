@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 
 // database configration 
 var USER = require("./Database/user.js");
+var TICKET = require("./Database/tickets.js");
 
 // set up router
 app.get('/', (req, res) =>{
@@ -77,9 +78,27 @@ app.post('/signup', (req, res) =>{
 });
 
 app.post('/tickets', (req, res) =>{
-    var body = _.pick(req.body,["ps", "username", "email"]);
-    var response = USER.insert(body);
-    res.end("Thanks !")
+    var body = _.pick(req.body,["value", "type", "expire", "email"]);
+    if(req.session.userInfo){
+        body.email = req.session.userInfo.email;
+    }
+    var response = TICKET.grantTicket(body);
+    if(response.res==0){
+        responseClient(res, 400, response.result, `Unable to process the request !`); 
+    }else{
+        responseClient(res, 200, response.response, "Your ticket is printed !");
+    }
+});
+
+app.post('/issuetickets', (req, res) =>{
+    var body = _.pick(req.body,["id", "email"]);
+    var response = TICKET.issue(body);
+    // console.log(response)
+    // if(response.res==0){
+        responseClient(res, 400, "", `Unable to process the request !`); 
+    // }else{
+    //     responseClient(res, 200, "", "Your ticket is printed !");
+    // }
 });
 
 app.post('/payment', (req, res) =>{
