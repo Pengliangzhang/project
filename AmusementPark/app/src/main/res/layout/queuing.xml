@@ -4,43 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".functions">
 
+    tools:context=".queuing">
 
-    <Button
-        android:id="@+id/bt_buy_ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/buyticket"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.203" />
-
-    <Button
-        android:id="@+id/bt_queuing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/queuing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403" />
-
-    <Button
-        android:id="@+id/bt_parking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/parking"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.603" />
 
     <TextView
         android:id="@+id/tv_account"
@@ -79,5 +45,8 @@
         app:layout_constraintStart_toStartOf="@+id/tv_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
