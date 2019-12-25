@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -22,13 +23,15 @@ public class buy_tickets extends AppCompatActivity {
     private TextView mydisplayDate;
     private DatePickerDialog.OnDateSetListener mydateSetListener;
     private Spinner ticketTypeSpinner, ticketNumSpinner,daysSpinner;
+    private String text;
+    private int t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.buy_tickets);
 
-        //Date Picker
+        /*Date Picker*/
         mydisplayDate = (TextView) findViewById(R.id.selectDate_hint);
         mydisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,13 +67,45 @@ public class buy_tickets extends AppCompatActivity {
         ticketNumSpinner = (Spinner) findViewById(R.id.number_spinner);
         daysSpinner = (Spinner) findViewById(R.id.days_spinner);
 
-        //Set ticket type adapter
-        ArrayAdapter<String> ticketTpyeAdapter = new ArrayAdapter<String>(
-                buy_tickets.this,
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.ticketTypes));
-        ticketTpyeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ticketTypeSpinner.setAdapter(ticketTpyeAdapter);
+        //Set ticket types(with prices) adapter which depend on the days_spinner
+        daysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            ArrayAdapter<String> ticketTpyeAdapter = null;
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                text = daysSpinner.getSelectedItem().toString();
+                t = Integer.valueOf(text);
+
+                //Set ticket type adapter
+                if(t==1){//1 day pass
+                    ticketTpyeAdapter = new ArrayAdapter<String>(
+                            buy_tickets.this,
+                            android.R.layout.simple_list_item_1,
+                            getResources().getStringArray(R.array.ticketTypes));
+                }else if (t==2){ //2 day pass
+                    ticketTpyeAdapter = new ArrayAdapter<String>(
+                            buy_tickets.this,
+                            android.R.layout.simple_list_item_1,
+                            getResources().getStringArray(R.array.ticketTypes2));
+                }else if(t==3){ //3 day pass
+                    ticketTpyeAdapter = new ArrayAdapter<String>(
+                            buy_tickets.this,
+                            android.R.layout.simple_list_item_1,
+                            getResources().getStringArray(R.array.ticketTypes3));
+                }else{
+                    //nothing
+                }
+
+                //ticketTpyeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ticketTypeSpinner.setAdapter(ticketTpyeAdapter);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
         //Set ticket numbers adapter
         ArrayAdapter<String> ticketNumAdapter = new ArrayAdapter<String>(

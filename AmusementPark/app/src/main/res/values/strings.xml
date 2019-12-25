@@ -17,11 +17,26 @@
     <string name="todo">TODO</string>
     <string name="todo2">TODO</string>
     <string-array name="ticketTypes">
-        <item>Child(Age3~12) </item>
-        <item>Adult</item>
-        <item>Senior(Age65+)</item>
-        <item>Student</item>
+        <item>Child(Age3~12) $10 </item>
+        <item>Adult $20</item>
+        <item>Senior(Age65+) $10</item>
+        <item>Student $15</item>
     </string-array>
+
+    <string-array name="ticketTypes2">
+        <item>Child(Age3~12) $20 </item>
+        <item>Adult $40</item>
+        <item>Senior(Age65+) $20</item>
+        <item>Student $30</item>
+    </string-array>
+
+    <string-array name="ticketTypes3">
+        <item>Child(Age3~12) $30 </item>
+        <item>Adult $60</item>
+        <item>Senior(Age65+) $30</item>
+        <item>Student $45</item>
+    </string-array>
+
     <string-array name="NumOfDays">
         <item>1</item>
         <item>2</item>
