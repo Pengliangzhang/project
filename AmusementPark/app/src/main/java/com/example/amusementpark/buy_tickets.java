@@ -1,14 +1,16 @@
 package com.example.amusementpark;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +27,8 @@ public class buy_tickets extends AppCompatActivity {
     private Spinner ticketTypeSpinner, ticketNumSpinner,daysSpinner;
     private String text;
     private int t;
+    private Button addtocart_btn;
+    private ImageView cartimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class buy_tickets extends AppCompatActivity {
         setContentView(R.layout.buy_tickets);
 
         /*Date Picker*/
+        //Initialize TextView
         mydisplayDate = (TextView) findViewById(R.id.selectDate_hint);
         mydisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,13 +67,16 @@ public class buy_tickets extends AppCompatActivity {
             }
         };
 
+
         /*Spinners for selecting ticket type and amount*/
+        //Initialize Spinners
         ticketTypeSpinner = (Spinner) findViewById(R.id.type_spinner);
         ticketNumSpinner = (Spinner) findViewById(R.id.number_spinner);
         daysSpinner = (Spinner) findViewById(R.id.days_spinner);
 
         //Set ticket types(with prices) adapter which depend on the days_spinner
         daysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
             ArrayAdapter<String> ticketTpyeAdapter = null;
 
             @Override
@@ -120,7 +128,23 @@ public class buy_tickets extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.NumOfDays));
         daysSpinner.setAdapter(daysAdapter);
+
+
+        /* Add to Cart Button Function*/
+        //Initialization
+        addtocart_btn = (Button) findViewById(R.id.addToCart);
+        cartimage = (ImageView) findViewById(R.id.cartimage);
+        cartimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(buy_tickets.this, myCart.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
 
 
 }

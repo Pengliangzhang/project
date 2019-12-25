@@ -19,6 +19,7 @@
         </activity>
 
         <activity android:name=".ticket_info"></activity>
+        <activity android:name=".myCart"></activity>
 
 
     </application>
