@@ -3,5 +3,38 @@
     <string name="register">Register</string>
     <string name="forgetpassword">Forget Password</string>
     <string name="login">Login</string>
+    <string name="yourTickets">Your Tickets</string>
+    <string name="ticketInfo">Your Tickets info here</string>
+    <string name="buyTicket_bt">Buy Ticket</string>
+    <string name="ticketHistory_bt">Booking History</string>
+    <string name="selectDate">Starting Date:</string>
+    <string name="selectTicketType">Ticket Type:</string>
+    <string name="totalPayment">Number of Tickets:</string>
+    <string name="placeOrder">Add to cart</string>
+    <string name="select_date_hint">Select Date</string>
+    <string name="days">Number of Days:</string>
+    <string name="title_ticketBooking">Ticket Booking System</string>
+    <string name="todo">TODO</string>
+    <string name="todo2">TODO</string>
+    <string-array name="ticketTypes">
+        <item>Child(Age3~12) </item>
+        <item>Adult</item>
+        <item>Senior(Age65+)</item>
+        <item>Student</item>
+    </string-array>
+    <string-array name="NumOfDays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="NumOfTickets">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
 
 </resources>
