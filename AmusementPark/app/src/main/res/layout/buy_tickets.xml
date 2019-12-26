@@ -197,8 +197,8 @@
 
         <ImageView
             android:id="@+id/user_image"
-            android:layout_width="99dp"
-            android:layout_height="87dp"
+            android:layout_width="77dp"
+            android:layout_height="75dp"
 
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -206,14 +206,14 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="304dp"
-            android:layout_marginLeft="304dp"
-            android:layout_marginTop="67dp"
+            android:layout_marginStart="326dp"
+            android:layout_marginLeft="326dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="24dp"
             android:contentDescription="@string/todo2"
-            android:scaleType="fitCenter"
+            android:scaleType="fitEnd"
             android:src="@drawable/user1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -221,21 +221,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.756" />
+
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/cartimage"
-        android:layout_width="64dp"
-        android:layout_height="59dp"
+        android:layout_width="59dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintHorizontal_bias="0.255"
         app:layout_constraintStart_toEndOf="@+id/addToCart"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893"
-        app:srcCompat="@drawable/cart" />
+        app:layout_constraintVertical_bias="0.885"
+        app:srcCompat="@drawable/cart2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

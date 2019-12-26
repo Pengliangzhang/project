@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".buy_tickets">
+        <activity android:name=".ticket_info">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +18,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ticket_info"></activity>
+        <activity android:name=".buy_tickets"></activity>
         <activity android:name=".myCart"></activity>
+        <activity android:name=".payment"></activity>
+        <activity android:name=".paymentDone"></activity>
 
 
     </application>

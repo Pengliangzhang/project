@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -134,6 +135,8 @@ public class buy_tickets extends AppCompatActivity {
         //Initialization
         addtocart_btn = (Button) findViewById(R.id.addToCart);
         cartimage = (ImageView) findViewById(R.id.cartimage);
+
+        //Make cart_ImageView clickable
         cartimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +145,18 @@ public class buy_tickets extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Add_to_Cart Button
+        addtocart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Make a toast
+                Toast.makeText(getApplicationContext(),"Add to cart",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
 
     }
 

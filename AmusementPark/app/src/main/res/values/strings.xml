@@ -17,6 +17,10 @@
     <string name="todo">TODO</string>
     <string name="todo2">TODO</string>
     <string name="todo3">TODO</string>
+    <string name="next_bt1">Next Step</string>
+    <string name="next_bt2">Confirm</string>
+    <string name="todo4">TODO4</string>
+
 
     <string-array name="ticketTypes">
         <item>Child(Age3~12) $10 </item>
