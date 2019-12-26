@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.amusementpark"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation 'com.github.baoyachi:StepView:1.9'
+    implementation 'com.braintreepayments:card-form:4.2.0'
 }
