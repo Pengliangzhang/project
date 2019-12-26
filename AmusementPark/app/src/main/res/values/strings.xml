@@ -3,7 +3,7 @@
     <string name="register">Register</string>
     <string name="forgetpassword">Forget Password</string>
     <string name="login">Login</string>
-    <string name="yourTickets">Your Tickets</string>
+    <string name="yourTickets">My Tickets</string>
     <string name="ticketInfo">Your Tickets info here</string>
     <string name="buyTicket_bt">Buy Ticket</string>
     <string name="ticketHistory_bt">Booking History</string>
@@ -20,6 +20,8 @@
     <string name="next_bt1">Next Step</string>
     <string name="next_bt2">Confirm</string>
     <string name="todo4">TODO4</string>
+    <string name="todo5">TODO5</string>
+    <string name="textview">See My Tickets</string>
 
 
     <string-array name="ticketTypes">

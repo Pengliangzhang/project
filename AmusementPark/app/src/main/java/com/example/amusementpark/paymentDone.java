@@ -1,6 +1,9 @@
 package com.example.amusementpark;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class paymentDone extends AppCompatActivity {
+    private TextView myticket;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,5 +45,17 @@ public class paymentDone extends AppCompatActivity {
                 .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(paymentDone.this, R.drawable.default_icon))//设置StepsViewIndicator DefaultIcon
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(paymentDone.this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
 
+        /*See My Tickets TextView Function*/
+        myticket = (TextView) findViewById(R.id.textView);
+
+        //Switch to ticket_info page
+        myticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(paymentDone.this,ticket_info.class);
+                startActivity(intent);
+            }
+        });
     }
 }
