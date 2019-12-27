@@ -9,7 +9,10 @@ import About from "./components/About/About";
 import Login from "./components/Login/Login";
 import Error from "./components/Error/Error";
 import Navigation from "./components/Header/Navigation";
-import Footer from "./components/Footer/Footer"
+import Footer from "./components/Footer/Footer";
+import SignUP from "./components/Sign Up/SignUp";
+import Account from "./components/Account/Account";
+
 
 
 function App() {
@@ -21,9 +24,10 @@ function App() {
             <Route path="/" component={Home} exact/>
             <Route path="/about" component={About} exact/>
             <Route path="/login" component={Login} exact/>
-            <Route  component={Error} />
+            <Route path="/myaccount" component={Account} exact/>
+            <Route path="/signup" component={SignUP} exact/>            
+            <Route component={Error} />
           </Switch>
-          <Footer />
         </BrowserRouter>
     </div>
   );

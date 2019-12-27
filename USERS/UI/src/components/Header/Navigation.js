@@ -1,24 +1,22 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import {Navbar, Form, Nav, NavDropdown, FormControl, Button} from "react-bootstrap";
 
 
 const Navigation = () => {
     return (
         <div>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Brand href="/">Amazing Park</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/about">About</Nav.Link>
+                    <NavDropdown title="My Account" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/login">Sign In</NavDropdown.Item>
+                    <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.4">Forget Password</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 <Form inline>

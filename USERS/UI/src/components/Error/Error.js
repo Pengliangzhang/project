@@ -4,6 +4,8 @@ const Error = () => {
     return (
         <div>
             <p>Page does not exist</p>
+            <p>Page does not exist</p>
+            <p>Page does not exist</p>
         </div>
     )
 }
