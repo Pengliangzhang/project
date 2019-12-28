@@ -9,7 +9,6 @@ import About from "./components/About/About";
 import Login from "./components/Login/Login";
 import Error from "./components/Error/Error";
 import Navigation from "./components/Header/Navigation";
-import Footer from "./components/Footer/Footer";
 import SignUP from "./components/Sign Up/SignUp";
 import Account from "./components/Account/Account";
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import axios from 'axios';
+
 
 const Login = () => {
     return (
@@ -28,7 +30,7 @@ const Login = () => {
                 />
                 </div>
                 <div className="text-center">
-                <MDBBtn>Login</MDBBtn>
+                <MDBBtn onClick={()=>{ SignIN() }}>Login</MDBBtn>
                 </div>
             </form>
             </MDBCol>
@@ -36,6 +38,38 @@ const Login = () => {
         </MDBContainer>
     </div>
     )
+}
+
+
+async function makePostRequest() {
+
+    var params = {
+        "ps": "1",
+        "username": "a"
+      }
+
+    let res = await axios.post('http://192.168.0.23:3000/login', params);
+
+    console.log(res.data);
+}
+
+// makePostRequest();
+
+const SignIN = ()=>{
+    console.log("Clicked ! ");
+    var res = 0;
+    axios.post('/userlogin', {
+        ps: "1",
+        username: "a"
+    })
+    .then(function (response) {
+        console.log(response);
+        res = response;
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    console.log(res)
 }
 
 export default Login;
