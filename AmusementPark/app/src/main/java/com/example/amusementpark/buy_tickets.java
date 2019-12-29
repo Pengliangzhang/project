@@ -25,7 +25,7 @@ public class buy_tickets extends AppCompatActivity {
     private static final String TAG ="buy_tickets";
     private TextView mydisplayDate;
     private DatePickerDialog.OnDateSetListener mydateSetListener;
-    private Spinner ticketTypeSpinner, ticketNumSpinner,daysSpinner;
+    private Spinner ticketTypeSpinner, ticketNumSpinner;
     private String text;
     private int t;
     private Button addtocart_btn;
@@ -73,48 +73,13 @@ public class buy_tickets extends AppCompatActivity {
         //Initialize Spinners
         ticketTypeSpinner = (Spinner) findViewById(R.id.type_spinner);
         ticketNumSpinner = (Spinner) findViewById(R.id.number_spinner);
-        daysSpinner = (Spinner) findViewById(R.id.days_spinner);
 
-        //Set ticket types(with prices) adapter which depend on the days_spinner
-        daysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-
-            ArrayAdapter<String> ticketTpyeAdapter = null;
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                text = daysSpinner.getSelectedItem().toString();
-                t = Integer.valueOf(text);
-
-                //Set ticket type adapter
-                if(t==1){//1 day pass
-                    ticketTpyeAdapter = new ArrayAdapter<String>(
-                            buy_tickets.this,
-                            android.R.layout.simple_list_item_1,
-                            getResources().getStringArray(R.array.ticketTypes));
-                }else if (t==2){ //2 day pass
-                    ticketTpyeAdapter = new ArrayAdapter<String>(
-                            buy_tickets.this,
-                            android.R.layout.simple_list_item_1,
-                            getResources().getStringArray(R.array.ticketTypes2));
-                }else if(t==3){ //3 day pass
-                    ticketTpyeAdapter = new ArrayAdapter<String>(
-                            buy_tickets.this,
-                            android.R.layout.simple_list_item_1,
-                            getResources().getStringArray(R.array.ticketTypes3));
-                }else{
-                    //nothing
-                }
-
-                //ticketTpyeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                ticketTypeSpinner.setAdapter(ticketTpyeAdapter);
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
-
-            }
-        });
+        //set ticket types adapter
+        ArrayAdapter<String> ticketTpyeAdapter = new ArrayAdapter<String>(
+                buy_tickets.this,
+                android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.ticketTypes));
+        ticketTypeSpinner.setAdapter(ticketTpyeAdapter);
 
         //Set ticket numbers adapter
         ArrayAdapter<String> ticketNumAdapter = new ArrayAdapter<String>(
@@ -123,12 +88,7 @@ public class buy_tickets extends AppCompatActivity {
                 getResources().getStringArray(R.array.NumOfTickets));
         ticketNumSpinner.setAdapter(ticketNumAdapter);
 
-        //Set days adapter
-        ArrayAdapter<String> daysAdapter = new ArrayAdapter<String>(
-                buy_tickets.this,
-                android.R.layout.simple_list_item_1,
-                getResources().getStringArray(R.array.NumOfDays));
-        daysSpinner.setAdapter(daysAdapter);
+
 
 
         /* Add to Cart Button Function*/
