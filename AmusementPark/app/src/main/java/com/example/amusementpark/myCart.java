@@ -30,7 +30,7 @@ public class myCart extends AppCompatActivity {
     int[] image = {R.drawable.ticket,R.drawable.ticket};
     String[] type = {"Student","Adult"};
     String[] price = {"$15","$20"};
-    String[] remove ={"remove","remove"};
+    //String[] remove ={"remove","remove"};
 
 
 
@@ -115,7 +115,7 @@ public class myCart extends AppCompatActivity {
             //Initialization
             TextView t_type = (TextView) convertView.findViewById(R.id.listview_type);
             TextView t_price = (TextView) convertView.findViewById(R.id.listview_price);
-            TextView t_remove = (TextView) convertView.findViewById(R.id.listview_remove);
+            ImageView t_remove = (ImageView) convertView.findViewById(R.id.listview_remove);
             Spinner t_numSpinner = (Spinner) convertView.findViewById(R.id.listview_num);
             ImageView t_image = (ImageView) convertView.findViewById(R.id.listview_image);
 
@@ -128,7 +128,7 @@ public class myCart extends AppCompatActivity {
             //Set up each info.
             t_type.setText(type[position]);
             t_price.setText(price[position]);
-            t_remove.setText(remove[position]);
+            t_remove.setImageResource(R.drawable.delete);
             t_numSpinner.setAdapter(ticketNumAdapter);
             t_image.setImageResource(image[position]);
 
