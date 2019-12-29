@@ -21,7 +21,13 @@
     <string name="next_bt2">Confirm</string>
     <string name="todo4">TODO4</string>
     <string name="todo5">TODO5</string>
-    <string name="textview">See My Tickets</string>
+    <string name="paymentdone">See My Tickets</string>
+    <string name="cartView_textview1">Ticket icon</string>
+    <string name="cartView_textview2">Ticket types</string>
+    <string name="cartView_textview3">Ticket price</string>
+    <string name="cartView_textview4">Remove</string>
+    <string name="cartView_textview5">TextView5</string>
+
 
 
     <string-array name="ticketTypes">

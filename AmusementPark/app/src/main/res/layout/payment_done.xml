@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:cursorVisible="true"
-        android:text="@string/textview"
+        android:text="@string/paymentdone"
         android:textColor="#25e068"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
