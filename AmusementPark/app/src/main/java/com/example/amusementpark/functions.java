@@ -73,7 +73,14 @@ public class functions extends AppCompatActivity {
 
 
         //button listener for buy ticket
-
+        bt_buy_ticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(functions.this, ticket_info.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
         //button listener for queuing
         bt_queuing.setOnClickListener(new View.OnClickListener() {
             @Override

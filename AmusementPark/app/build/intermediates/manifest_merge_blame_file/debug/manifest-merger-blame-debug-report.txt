@@ -5,7 +5,7 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="15"
+8        android:minSdkVersion="16"
 8-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="29" />
 9-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml
@@ -27,7 +27,7 @@
 15-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:8:22-63
 16
 17    <application
-17-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:9:5-31:19
+17-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:9:5-42:19
 18        android:allowBackup="true"
 18-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:10:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -47,41 +47,56 @@
 27        android:usesCleartextTraffic="true" >
 27-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:15:9-44
 28        <activity android:name="com.example.amusementpark.MainPage" >
-28-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:17:9-23:20
-28-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:17:19-43
+28-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:18:9-24:20
+28-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:18:19-43
 29            <intent-filter>
-29-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:18:13-22:29
+29-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:19:13-23:29
 30                <action android:name="android.intent.action.MAIN" />
-30-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:19:17-69
-30-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:19:25-66
+30-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:20:17-69
+30-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:20:25-66
 31
 32                <category android:name="android.intent.category.LAUNCHER" />
-32-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:21:17-77
-32-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:21:27-74
+32-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:22:17-77
+32-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:22:27-74
 33            </intent-filter>
 34        </activity>
 35        <activity android:name="com.example.amusementpark.register" />
-35-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:24:9-55
-35-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:24:19-43
+35-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:26:9-55
+35-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:26:19-43
 36        <activity android:name="com.example.amusementpark.functions" />
-36-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:25:9-56
-36-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:25:19-44
+36-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:27:9-56
+36-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:27:19-44
 37        <activity android:name="com.example.amusementpark.forgetPassword" />
-37-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:26:9-61
-37-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:26:19-49
+37-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:28:9-61
+37-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:28:19-49
 38        <activity android:name="com.example.amusementpark.account" />
-38-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:27:9-54
-38-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:27:19-42
+38-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:29:9-54
+38-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:29:19-42
 39        <activity android:name="com.example.amusementpark.parking" />
-39-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:28:9-54
-39-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:28:19-42
+39-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:30:9-54
+39-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:30:19-42
 40        <activity android:name="com.example.amusementpark.queuing" />
-40-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:29:9-54
-40-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:29:19-42
-41        <activity android:name="com.blikoon.qrcodescanner.QrCodeActivity" >
-41-->[com.github.blikoon:QRCodeScanner:0.1.2] /Users/abble/.gradle/caches/transforms-2/files-2.1/c5ba8e6cda272be85dddb69d814b9fe1/jetified-QRCodeScanner-0.1.2/AndroidManifest.xml:15:9-16:20
-41-->[com.github.blikoon:QRCodeScanner:0.1.2] /Users/abble/.gradle/caches/transforms-2/files-2.1/c5ba8e6cda272be85dddb69d814b9fe1/jetified-QRCodeScanner-0.1.2/AndroidManifest.xml:15:19-74
-42        </activity>
-43    </application>
-44
-45</manifest>
+40-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:31:9-54
+40-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:31:19-42
+41        <activity android:name="com.example.amusementpark.buy_tickets" />
+41-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:34:9-58
+41-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:34:19-46
+42        <activity android:name="com.example.amusementpark.myCart" />
+42-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:35:9-53
+42-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:35:19-41
+43        <activity android:name="com.example.amusementpark.payment" />
+43-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:36:9-54
+43-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:36:19-42
+44        <activity android:name="com.example.amusementpark.paymentDone" />
+44-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:37:9-58
+44-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:37:19-46
+45        <activity android:name="com.example.amusementpark.ticket_info" />
+45-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:38:9-58
+45-->/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/AndroidManifest.xml:38:19-46
+46        <activity android:name="com.blikoon.qrcodescanner.QrCodeActivity" >
+46-->[com.github.blikoon:QRCodeScanner:0.1.2] /Users/abble/.gradle/caches/transforms-2/files-2.1/c5ba8e6cda272be85dddb69d814b9fe1/jetified-QRCodeScanner-0.1.2/AndroidManifest.xml:15:9-16:20
+46-->[com.github.blikoon:QRCodeScanner:0.1.2] /Users/abble/.gradle/caches/transforms-2/files-2.1/c5ba8e6cda272be85dddb69d814b9fe1/jetified-QRCodeScanner-0.1.2/AndroidManifest.xml:15:19-74
+47        </activity>
+48    </application>
+49
+50</manifest>
