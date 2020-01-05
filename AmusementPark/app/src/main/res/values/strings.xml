@@ -3,5 +3,15 @@
     <string name="register">Register</string>
     <string name="forgetpassword">Forget Password</string>
     <string name="login">Login</string>
-
+    <string name="buyticket">Buy Ticket</string>
+    <string name="queuing">Queuing</string>
+    <string name="parking">Parking</string>
+    <string name="account">Account</string>
+    <string name="scanqr">Scan QR Code</string>
+    <string name="username">Username</string>
+    <string name="curr_password">Current Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="update_info">Update Information</string>
+    <string name="plate_number">Plate Number</string>
+    <string name="confirm">Confirm</string>
 </resources>

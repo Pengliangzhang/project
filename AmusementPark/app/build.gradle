@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.example.amusementpark"
         minSdkVersion 15
@@ -26,4 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    compile 'com.github.blikoon:QRCodeScanner:0.1.2'
+
+
 }
