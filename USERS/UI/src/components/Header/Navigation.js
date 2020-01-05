@@ -1,8 +1,37 @@
 import React from "react";
 import {Navbar, Form, Nav, NavDropdown, FormControl, Button} from "react-bootstrap";
-
+import axios from 'axios';
 
 const Navigation = () => {
+    var res;
+    const checkUSER = async () =>{
+        await axios.get('/userinfo')
+        .then(function (response) {
+            // _this.setState({
+                res= response
+                // console.log(response)
+                // isLoaded:true
+            // })
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error)
+            // _this.setState({
+            //     isLoaded:false
+            // })            
+        })
+        .finally(function () {
+            // always executed
+            // console.log(res.data.code)  
+        });
+    }
+    checkUSER();
+    console.log(res)
+    if(res !== undefined){
+        console.log("LOG LOG LOG")
+    }else{
+        console.log("666")
+    }
     return (
         <div>
             <Navbar bg="light" expand="lg">

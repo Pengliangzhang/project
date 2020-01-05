@@ -1,9 +1,11 @@
 const proxy = require ('http-proxy-middleware');
 
+const URL = "https://9923e08a.ngrok.io";
+
 module.exports = function(app) {
     app.use(
         proxy("/userlogin", {
-            target: "http://192.168.0.23:3000",
+            target: URL,
             secure: false,
             changeOrigin:true
         })
@@ -11,7 +13,15 @@ module.exports = function(app) {
 
     app.use(
         proxy("/userinfo", {
-            target: "http://192.168.0.23:3000",
+            target: URL,
+            changeOrigin:true
+        })
+    );
+
+    app.use(
+        proxy("/usersignup", {
+            target: URL,
+            secure: false,
             changeOrigin:true
         })
     );
