@@ -52,11 +52,14 @@ class Login extends React.Component{
     }
 
     render(){
+
         return (
             <div>
-                姓名：<input name="username" value={this.state.username} onChange={this.handleChange}/>
-                密码：<input name="ps" type='password' value={this.state.password} onChange={this.handleChange}/>
-               <input type='submit' value="登录" onClick={this.up}/>
+                <form>
+                    姓名：<input name="username" value={this.state.username} onChange={this.handleChange}/><br/>
+                    密码：<input name="ps" type='password' value={this.state.password} onChange={this.handleChange}/><br/>
+                    <input type='submit' value="登录" onClick={this.up}/>
+                </form>              
                {/* <MDBContainer>
                 <MDBRow>
                     <MDBCol md="6">

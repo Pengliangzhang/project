@@ -11,6 +11,7 @@ import Error from "./components/Error/Error";
 import Navigation from "./components/Header/Navigation";
 import SignUP from "./components/Sign Up/SignUp";
 import Account from "./components/Account/Account";
+import Ticket from "./components/Tickets/Ticket";
 
 
 
@@ -24,7 +25,8 @@ function App() {
             <Route path="/about" component={About} exact/>
             <Route path="/login" component={Login} exact/>
             <Route path="/myaccount" component={Account} exact/>
-            <Route path="/signup" component={SignUP} exact/>            
+            <Route path="/signup" component={SignUP} exact/>    
+            <Route path="/tickets" component={Ticket} exact/>        
             <Route component={Error} />
           </Switch>
         </BrowserRouter>

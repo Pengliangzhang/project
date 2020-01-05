@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 class Account extends React.Component{
     constructor(props){
@@ -49,7 +50,41 @@ class Account extends React.Component{
 const accountDETAIL = () => {
     return (
         <div>
-            <p> DETAIL </p>
+            <Table striped bordered hover size="sm">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>Ticket ID</th>
+                    <th>Ticket Type</th>
+                    <th>Purchase Date</th>
+                    <th>Expire Date</th>
+                    <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>1</td>
+                    <td>1234567890123</td>
+                    <td>General</td>
+                    <td>2020/01/01</td>
+                    <td>2020/02/01</td>
+                    <td>$ 165</td>
+                    </tr>
+                    <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <td>3</td>
+                    <td colSpan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </Table>
         </div>
     )
 }

@@ -25,4 +25,12 @@ module.exports = function(app) {
             changeOrigin:true
         })
     );
+
+    app.use(
+        proxy("/puchasetickets", {
+            target: URL,
+            secure: false,
+            changeOrigin:true
+        })
+    );
 };

@@ -41,9 +41,11 @@ const Navigation = () => {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/about">About</Nav.Link>
+                    <Nav.Link href="/tickets">Tickets</Nav.Link>
                     <NavDropdown title="My Account" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/login">Sign In</NavDropdown.Item>
                     <NavDropdown.Item href="/signup">Sign Up</NavDropdown.Item>
+                    <NavDropdown.Item href="/myaccount">My Account</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Forget Password</NavDropdown.Item>
                     </NavDropdown>
