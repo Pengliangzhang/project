@@ -14,19 +14,29 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainPage">
+
+        <activity android:name=".ticket_info">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".register"></activity>
         <activity android:name=".functions"></activity>
         <activity android:name=".forgetPassword"></activity>
         <activity android:name=".account"></activity>
         <activity android:name=".parking"></activity>
         <activity android:name=".queuing"></activity>
+=======
+
+        <activity android:name=".buy_tickets"></activity>
+        <activity android:name=".myCart"></activity>
+        <activity android:name=".payment"></activity>
+        <activity android:name=".paymentDone"></activity>
+
+>>>>>>> lixuanluo
 
     </application>
 
