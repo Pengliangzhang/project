@@ -13,6 +13,7 @@ public class register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        setTitle("Register");
 
         // elements initialization
         tv_back = (TextView) findViewById(R.id.tv_back);

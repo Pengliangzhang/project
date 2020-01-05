@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blikoon.qrcodescanner.QrCodeActivity;
+
 public class parking extends AppCompatActivity {
 
 
@@ -26,17 +28,22 @@ public class parking extends AppCompatActivity {
     private Button bt_confirm;
     private String username;
     private String plateNumber;
+    private TextView tv_scan_qr;
+    private static final int REQUEST_CODE_QR_SCAN = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.parking);
+        setTitle("Parking");
 
         // elements initialization
         tv_account = (TextView) findViewById(R.id.tv_account);
         tv_back = (TextView) findViewById(R.id.tv_back);
         et_plate_number = (EditText) findViewById(R.id.et_plate_number);
         bt_confirm = (Button) findViewById(R.id.bt_confirm);
+        tv_scan_qr=(TextView) findViewById(R.id.tv_scan_qr);
+
 
         // receive parameter from previous page
         Intent getIntent = getIntent();
@@ -90,6 +97,17 @@ public class parking extends AppCompatActivity {
                     bt_confirm.setEnabled(Boolean.TRUE);
 
                 }
+            }
+        });
+
+        //listener for textview scan QR code
+        tv_scan_qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Start the qr scan activity
+                Intent intent = new Intent(parking.this, QrCodeActivity.class);
+                intent.putExtra("username", username);
+                startActivityForResult( intent,REQUEST_CODE_QR_SCAN);
             }
         });
 

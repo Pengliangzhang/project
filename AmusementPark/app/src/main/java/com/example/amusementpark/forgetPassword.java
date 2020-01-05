@@ -13,6 +13,7 @@ public class forgetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpassword);
+        setTitle("Forget Password");
 
         // elements initialization
         tv_back = (TextView) findViewById(R.id.tv_back);

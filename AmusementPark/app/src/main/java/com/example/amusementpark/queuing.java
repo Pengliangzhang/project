@@ -7,18 +7,25 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.blikoon.qrcodescanner.QrCodeActivity;
+
 public class queuing extends AppCompatActivity {
     private TextView tv_account;
     private TextView tv_back;
+    private TextView tv_scan_qr;
+    private static final int REQUEST_CODE_QR_SCAN = 101;
     private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.queuing);
+        setTitle("Queuing");
 
         // elements initialization
         tv_account = (TextView) findViewById(R.id.tv_account);
         tv_back = (TextView) findViewById(R.id.tv_back);
+        tv_scan_qr=(TextView) findViewById(R.id.tv_scan_qr);
+
 
         // receive parameter from previous page
         Intent getIntent = getIntent();
@@ -44,5 +51,17 @@ public class queuing extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //listener for textview scan QR code
+        tv_scan_qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Start the qr scan activity
+                Intent intent = new Intent(queuing.this, QrCodeActivity.class);
+                intent.putExtra("username", username);
+                startActivityForResult( intent,REQUEST_CODE_QR_SCAN);
+            }
+        });
+
     }
 }

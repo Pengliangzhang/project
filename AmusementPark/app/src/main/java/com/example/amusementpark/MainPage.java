@@ -2,10 +2,13 @@ package com.example.amusementpark;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,6 +19,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 public class MainPage extends AppCompatActivity {
 
@@ -28,10 +41,37 @@ public class MainPage extends AppCompatActivity {
     private String username = null;
     private String password = null;
 
+    private static final int SUCCESS = 1;
+    private static final int FAIL = 0;
+    private boolean PASS = false;
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case SUCCESS:
+                    PASS = true;
+                    Intent intent = new Intent(MainPage.this, functions.class);
+                    intent.putExtra("username", username);
+                    startActivity(intent);
+                    break;
+                case FAIL:
+                    toast("password incorrect");
+                    et_password.setText("");
+                    PASS = false;
+                    break;
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
 
         // hide keyboard
         ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0).setOnClickListener(new View.OnClickListener() {
@@ -118,28 +158,95 @@ public class MainPage extends AppCompatActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkPassword(username, password)) {
-                    System.out.println("user name = " + username);
-                    System.out.println("password = " + password);
-                    Intent intent = new Intent(MainPage.this, functions.class);
-                    intent.putExtra("username", username);
-                    startActivity(intent);
-                } else {
-
-                    et_password.setText("");
-                    toast("password is incorrect.");
-                }
+                //check username and password
+                checkPassword(username, password);
             }
         });
     }
 
 
-    private boolean checkPassword(String username, String password) {
-        if (username.equals("a") && password.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+    private void checkPassword(final String username, final String password) {
+        int result = 0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                Message message = handler.obtainMessage();
+                try {
+                    URL url = new URL("https://9923e08a.ngrok.io/userlogin");
+                    connection = (HttpURLConnection) url.openConnection();
+                    /*connection.setRequestMethod("GET");
+                    //设置连接超时时间（毫秒）
+                    connection.setConnectTimeout(5000);
+                    //设置读取超时时间（毫秒）
+                    connection.setReadTimeout(5000);
+                    //返回输入流
+                    InputStream in = connection.getInputStream();
+
+                    //读取输入流
+                    reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    show(result.toString());
+                    */
+
+                    connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
+                    connection.setDoInput(true);// 设置是否从httpUrlConnection读入，默认情况下是true;
+                    connection.setUseCaches(false);// Post 请求不能使用缓存
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    connection.connect();
+                    connection.setConnectTimeout(2 * 1000);//set connection timeout
+                    connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+                    String body = "{\"ps\":\"" + password + "\",\"username\":\"" + username + "\"}";
+                    System.out.println("body " + body);
+
+                    JSONObject jsonObject = new JSONObject(body);
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+                    writer.write(String.valueOf(jsonObject));
+                    writer.close();
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        //定义 BufferedReader输入流来读取URL的响应
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String re = "";
+                        String line;
+                        while ((line = in.readLine()) != null) {
+                            re += line;
+
+                        }
+                        int res = Integer.parseInt(re.substring(8, 9));
+                        if (res == 0) {
+                            message.what = FAIL;
+
+                        } else if (res == 1) {
+                            message.what = SUCCESS;
+                        }
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+                handler.sendMessage(message);
+
+            }
+        }).start();
+
+
     }
 
     //hide keyboard
@@ -153,6 +260,8 @@ public class MainPage extends AppCompatActivity {
     private void toast(String s) {
         Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 }
