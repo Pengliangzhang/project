@@ -10,5 +10,6 @@
     <color name="cyan">#C7E3F0</color>
     <color name="indigo_top">#185C77</color>
     <color name="gray">#707070</color>
+    <drawable name="red">#FF0000</drawable>
 
 </resources>

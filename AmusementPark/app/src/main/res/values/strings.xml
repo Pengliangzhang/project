@@ -15,6 +15,9 @@
     <string name="update_info">Update Information</string>
     <string name="plate_number">Plate Number</string>
     <string name="confirm">Confirm</string>
+    <string name="password">Your Password</string>
+    <string name="email">email</string>
+
 
     <string name="yourTickets">My Tickets</string>
     <string name="ticketInfo">Your Tickets info here</string>

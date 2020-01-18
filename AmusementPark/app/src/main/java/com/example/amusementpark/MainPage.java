@@ -182,7 +182,11 @@ public class MainPage extends AppCompatActivity {
                 BufferedReader reader = null;
                 Message message = handler.obtainMessage();
                 try {
-                    URL url = new URL("https://9923e08a.ngrok.io/userlogin");
+
+                    myConnection urlbase=new myConnection();
+                    String surl= urlbase.getUrl()+"userlogin";
+                    System.out.println("surl "+surl);
+                    URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
                     /*connection.setRequestMethod("GET");
                     //设置连接超时时间（毫秒）
@@ -270,17 +274,6 @@ public class MainPage extends AppCompatActivity {
 
 
 
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-
-    }
-
- */
 
 
 
