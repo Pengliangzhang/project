@@ -12,7 +12,7 @@ class Account extends React.Component{
     }
     componentDidMount(){
         let _this = this;
-        axios.get('/userinfo')
+        axios.get('http://57e1ae60.ngrok.io/userinfo')
         .then(function (response) {
             _this.setState({
                 response: response,

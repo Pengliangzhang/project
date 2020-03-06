@@ -22,33 +22,37 @@ class Login extends React.Component{
           [name]:value
       })
     }
-    async up(){
+    up(){
+        window.location.href = "/myaccount"
+        console.log(this.state.username + " " + this.state.ps)
+        console.log("Start waiting !")
         console.log(this.state)
-        if (this.state.ps==='' || this.state.username===''){
-            console.log("NONE")
-        }else{
-            var res;
-
-            await axios.post('/userlogin', {
-                ps: this.state.ps,
-                username: this.state.username
-            })
-            .then(function (response) {
-                res = response;
-                console.log(res);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            console.log(res)
-            var data = res.data;
-            if (data.code===1){
-                window.location.href = '/myaccount'
-            }else if (data.code===0){
-                window.location.href = '/login'
-            }
+//         if (this.state.ps==='' || this.state.username===''){
+//             console.log("NONE")
+//         }else{
+//             var res;
+//             console.log(this.state.username + " " + this.state.ps)
+// ;            console.log("Start waiting !")
+            // await axios.post('/userlogin', {
+            //     ps: this.state.ps,
+            //     username: this.state.username
+            // })
+            // .then(function (response) {
+            //     res = response;
+            //     console.log(res);
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
+            // console.log(res)
+            // var data = res.data;
+            // if (data.code===1){
+                // window.location.href = '/myaccount'
+            // }else if (data.code===0){
+            //     window.location.href = '/login'
+            // }
             //;
-        }
+        // }
     }
 
     render(){

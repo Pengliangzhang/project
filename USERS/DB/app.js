@@ -113,6 +113,6 @@ app.listen(3000, () =>{
     console.log("My REST API is running on port 3000 !");
 })
 
-app.listen(3000, "192.168.56.1", () =>{
-    console.log("My REST API is running on LAN port 3000 !");
-})
+// app.listen(3000, "192.168.56.1", () =>{
+//     console.log("My REST API is running on LAN port 3000 !");
+// })

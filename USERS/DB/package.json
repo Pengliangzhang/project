@@ -29,5 +29,9 @@
     "path": "^0.12.7",
     "quick-encrypt": "^1.0.8",
     "uniqid": "^5.1.0"
+  },
+
+  "engines": {
+    "node": "8.x"
   }
 }

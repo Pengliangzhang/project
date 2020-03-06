@@ -1,10 +1,10 @@
 const proxy = require ('http-proxy-middleware');
 
-const URL = "https://9923e08a.ngrok.io";
+const URL = "http://localhost:3002";
 
 module.exports = function(app) {
     app.use(
-        proxy("/userlogin", {
+        proxy("/login", {
             target: URL,
             secure: false,
             changeOrigin:true

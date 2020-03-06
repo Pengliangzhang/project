@@ -26,11 +26,11 @@ const Navigation = () => {
         });
     }
     checkUSER();
-    console.log(res)
+    // console.log(res)
     if(res !== undefined){
         console.log("LOG LOG LOG")
     }else{
-        console.log("666")
+        // console.log("666")
     }
     return (
         <div>

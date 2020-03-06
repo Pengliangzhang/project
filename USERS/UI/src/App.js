@@ -23,10 +23,10 @@ function App() {
           <Switch>
             <Route path="/" component={Home} exact/>
             <Route path="/about" component={About} exact/>
-            <Route path="/login" component={Login} exact/>
+            <Route path="/mylogin" component={Login} exact/>
             <Route path="/myaccount" component={Account} exact/>
-            <Route path="/signup" component={SignUP} exact/>    
-            <Route path="/tickets" component={Ticket} exact/>        
+            <Route path="/signup" component={SignUP} exact/>
+            <Route path="/tickets" component={Ticket} exact/>
             <Route component={Error} />
           </Switch>
         </BrowserRouter>
