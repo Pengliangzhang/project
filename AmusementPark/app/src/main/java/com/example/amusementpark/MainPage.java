@@ -2,6 +2,7 @@ package com.example.amusementpark;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -29,8 +30,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
 
 public class MainPage extends AppCompatActivity {
+
 
 
     private Button bt_login;
@@ -175,7 +182,11 @@ public class MainPage extends AppCompatActivity {
                 BufferedReader reader = null;
                 Message message = handler.obtainMessage();
                 try {
-                    URL url = new URL("https://9923e08a.ngrok.io/userlogin");
+
+                    myConnection urlbase=new myConnection();
+                    String surl= urlbase.getUrl()+"userlogin";
+                    System.out.println("surl "+surl);
+                    URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
                     /*connection.setRequestMethod("GET");
                     //设置连接超时时间（毫秒）
@@ -260,6 +271,9 @@ public class MainPage extends AppCompatActivity {
     private void toast(String s) {
         Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
     }
+
+
+
 
 
 

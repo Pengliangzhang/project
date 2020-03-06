@@ -21,7 +21,6 @@ import com.blikoon.qrcodescanner.QrCodeActivity;
 public class functions extends AppCompatActivity {
 
     private TextView tv_account;
-    private TextView tv_back;
     private Button bt_buy_ticket;
     private Button bt_queuing;
     private Button bt_parking;
@@ -29,6 +28,7 @@ public class functions extends AppCompatActivity {
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private final String LOGTAG = "QRCScanner-MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +37,15 @@ public class functions extends AppCompatActivity {
 
         // elements initialization
         tv_account = (TextView) findViewById(R.id.tv_account);
-        tv_back = (TextView) findViewById(R.id.tv_back);
         bt_buy_ticket = (Button) findViewById(R.id.bt_buy_ticket);
         bt_queuing = (Button) findViewById(R.id.bt_queuing);
         bt_parking = (Button) findViewById(R.id.bt_parking);
-        tv_scan_qr=(TextView) findViewById(R.id.tv_scan_qr);
+        tv_scan_qr = (TextView) findViewById(R.id.tv_scan_qr);
 
         // receive parameter from previous page
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
-        System.out.println("username from previous page = "+username);
+        System.out.println("username from previous page = " + username);
 
         //listener for textview scan QR code
         tv_scan_qr.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +54,7 @@ public class functions extends AppCompatActivity {
                 //Start the qr scan activity
                 Intent intent = new Intent(functions.this, QrCodeActivity.class);
                 intent.putExtra("username", username);
-                startActivityForResult( intent,REQUEST_CODE_QR_SCAN);
+                startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
             }
         });
 
@@ -71,9 +70,15 @@ public class functions extends AppCompatActivity {
         });
 
 
-
         //button listener for buy ticket
-
+        bt_buy_ticket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(functions.this, ticket_info.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
         //button listener for queuing
         bt_queuing.setOnClickListener(new View.OnClickListener() {
             @Override
