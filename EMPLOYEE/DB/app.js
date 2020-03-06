@@ -21,6 +21,7 @@ app.use(session({
 app.use('/',express.static(path.join(__dirname,"..",'public')));
 
 // configuration for app to allow json format
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // database configration
@@ -29,18 +30,11 @@ var TICKET = require("./Database/tickets.js");
 
 // set up router
 app.get('/', (req, res) =>{
-    console.log("Established a connection !");
-
-    var body = _.pick(req.body,["ps", "username"]);
-    console.log(req);
-    res.setHeader("Access-Control-Allow-Origin","*");
     res.send("Hello admin db system");
 });
 
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
-    console.log(req);
-    // console.log(body);
     if(!body.username){
         responseClient(res, 200, 0, "user name cannot be none!");
     }
@@ -71,14 +65,17 @@ app.get('/userInfo', (req, res)=>{
 
 app.get('/logout', (req, res)=>{
     req.session.userInfo = undefined;
-    responseClient(res, 400, 1, "Please login !");
+    responseClient(res, 400, 1, "Thanks for logging in !");
 })
 
-app.post('/signup', (req, res) =>{
+app.post('/adminsignup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
+    if(body.ps === undefined || body.username === undefined){
+        return responseClient(res, 200, 0, "Please enter required information");
+    }
     var response = USER.insert(body);
     if(response.res==0){
-        responseClient(res, 400, response.res, `Username: ${body.username} exist, please choose another one !`);
+        responseClient(res, 200, response.res, `Username: ${body.username} exist, please choose another one !`);
     }else{
         responseClient(res, 200, response.res, "Thanks for signup !");
     }
@@ -86,14 +83,25 @@ app.post('/signup', (req, res) =>{
 
 
 app.post('/verifytickets', (req, res) =>{
-    var body = _.pick(req.body,["id", "email"]);
-    var response = TICKET.issue(body);
-    // console.log(response)
-    // if(response.res==0){
-        responseClient(res, 400, "", `Unable to process the request !`);
-    // }else{
-    //     responseClient(res, 200, "", "Your ticket is printed !");
-    // }
+    var body = _.pick(req.body,["id"]);
+    if(body.id === undefined){
+        responseClient(res, 200, 0, `A id is required to provide !`);
+    }
+    var response = TICKET.verify(body);
+    
+    if(response.status==-1){
+        responseClient(res, 200, -1, `Not a valid ticket !`);
+    }else if (response.status==0){
+        responseClient(res, 200, 0, "Your ticket has been used !");
+    }else if (response.status==1){
+        responseClient(res, 200, 1, "Welcome !");
+    }
+});
+
+app.get('/queryalltickets', (req, res) =>{
+    
+    var response = TICKET.queryAll();
+    responseClient(res, 200, 1, response);
 });
 
 

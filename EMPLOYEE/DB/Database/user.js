@@ -81,7 +81,7 @@ var parserUser = function(body) {
 }
 
 var comparePASS = function(body) {
-  let sql = `SELECT * FROM USERS WHERE username='${body.username}'`;
+  let sql = `SELECT * FROM ADMINUSERS WHERE username='${body.username}'`;
   // create table USERS if not exist
   var comp, user, result; // success: result=1; deny: result=0; User not exist: result=-1;
   connection.query(sql, (err, USER, fields)=>{
@@ -100,7 +100,7 @@ var comparePASS = function(body) {
       return;
     }
     var id=USER[0].id;
-    var sqlPASS = `SELECT * FROM PASS WHERE id='${id}'`;
+    var sqlPASS = `SELECT * FROM ADMINPASS WHERE id='${id}'`;
     connection.query(sqlPASS, (err, PASS, fields)=>{
       if(err){
         console.log(err.message);
