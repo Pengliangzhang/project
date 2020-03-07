@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 // database configration
 var USER = require("./Database/user.js");
 var TICKET = require("./Database/tickets.js");
+var FOB = require("./Database/fob.js");
 
 // set up router
 app.get('/', (req, res) =>{
@@ -36,11 +37,11 @@ app.get('/', (req, res) =>{
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
     if(!body.username){
-        responseClient(res, 200, 0, "user name cannot be none!");
+        return responseClient(res, 200, 0, "user name cannot be none!");
     }
 
     if(!body.ps){
-        responseClient(res, 200, 0, "password cannot be none!");
+        return responseClient(res, 200, 0, "password cannot be none!");
     }
 
     var response = USER.compare(body);
@@ -81,14 +82,40 @@ app.post('/adminsignup', (req, res) =>{
     }
 });
 
+app.post('/activatefob', (req, res) =>{
+    var body = _.pick(req.body,["fobid", "ticketID"]);
+    if(body.fobid === undefined || body.ticketID === undefined || body.fobid ==''){
+        return responseClient(res, 200, 0, "Please enter required information");
+    }
+    var response = FOB.activate(body);
+    if(response.res == 1){
+        responseClient(res, 200, 1, "The fob has been activated");
+    }else{
+        responseClient(res, 200, 0, "The fob been assigned to others");
+    }
+});
+
+app.post('/deletefob', (req, res) =>{
+    var body = _.pick(req.body,["fobid"]);
+    if(body.fobid === undefined){
+        return responseClient(res, 200, 0, "Please enter required information");
+    }
+    var response = FOB.deactivated(body);
+    if(response.res == 1){
+        responseClient(res, 200, 1, "The fob has been de-activated");
+    }else{
+        responseClient(res, 200, 0, "No such fob to de-activated");
+    }
+});
+
 
 app.post('/verifytickets', (req, res) =>{
     var body = _.pick(req.body,["id"]);
-    if(body.id === undefined){
-        responseClient(res, 200, 0, `A id is required to provide !`);
+    if(body.id === undefined || body.id === ''){
+        return responseClient(res, 200, 0, `A id is required to provide !`);
     }
     var response = TICKET.verify(body);
-    
+
     if(response.status==-1){
         responseClient(res, 200, -1, `Not a valid ticket !`);
     }else if (response.status==0){
@@ -98,8 +125,9 @@ app.post('/verifytickets', (req, res) =>{
     }
 });
 
+
 app.get('/queryalltickets', (req, res) =>{
-    
+
     var response = TICKET.queryAll();
     responseClient(res, 200, 1, response);
 });

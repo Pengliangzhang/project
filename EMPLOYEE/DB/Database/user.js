@@ -38,8 +38,10 @@ var parserUser = function(body) {
     }
   });
 
-  var duplicate, res, user; // if success, res=1; if fail, res=0
-  // check exist username, 1=exist; 0=not exist;
+  var duplicate, res, user;
+  // {res} if success, res=1; if fail, res=0
+  // {duplicate} check exist username, 1=exist; 0=not exist;
+  
   connection.query(sqlSelect, (err, result) => {
     if(err){
       console.log(err);

@@ -1,1 +1,51 @@
-<p>This is the admin home page</p>
+<div class="container-fluid" >
+    <div class="row">
+        <button type="button" class="col-6 btn btn-primary" id="load_ticket_button">Load all tickets</button>
+        <button type="button" class="col-6 btn btn-success" id="verify_ticket_button">Verify a ticket</button>
+    </div>
+
+    <div class="row" id="load_tickets_container" style="display:none">
+         <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ticket ID</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Expire Date</th>
+                    <th scope="col">Validate</th>
+                </tr>
+            </thead>
+            <tbody id="load_tickets_table">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row justify-content-md-center" id="verify_ticket_container" style="display: none; padding-top:10%;">
+        <form id="verify_ticket_form" action= "/verifytickets" method="post">
+            <div class="form-group">
+                <label for="input_ticket_id">Please scan a valid ticket !</label>
+                <input type="text" name="id" class="form-control" id="input_ticket_id" aria-describedby="ticketHelp" placeholder="Ticket ID" style="width:130%">
+                <input class="form-control" id="verify_ticket_feedback" type="text" placeholder="Please scan a ticket " style="width:130%" readonly>
+                <small id="emailHelp" class="form-text text-muted">We provide best services.</small>
+            </div>            
+            <button type="button" onclick="submitVerifyTicket()" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="row justify-content-md-center" id="activate_fob_container" style="display: none; padding-top:10%">
+        <form id="activate_fob_form" action= "/activatefob" method="post">
+            <div class="form-group">
+                <label for="input_register_fob">Please tap a fob</label>
+                <input type="text" name="fobid" class="form-control" id="input_register_fob" aria-describedby="ticketHelp" placeholder="Fob" style="width:130%">
+                <input type="text" name="ticketID" class="form-control" id="input_ticket_fob" aria-describedby="ticketHelp" style="display:none">
+                <input class="form-control" id="register_fob_feedback" type="text" placeholder="Please tap a fob " style="width:130%" readonly>
+                <small id="emailHelp" class="form-text text-muted">We provide best services.</small>
+            </div>            
+            <button type="button" onclick="submitActivateFob()" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</div>
