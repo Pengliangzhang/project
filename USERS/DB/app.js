@@ -12,68 +12,91 @@ const PORT = process.env.PORT || 3000;
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
-app.use(session({
-    secret:'express_react_cookie',
-    resave:true,
-    saveUninitialized:true,
-    cookie:{maxAge: 60 * 1000 * 30} //30 mins for session expired
-}))
+app.set('trust proxy', 1)
+
+app.use(
+  session({
+    secret:
+      "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true, maxAge: 60000 }
+  })
+)
 
 app.use('/public',express.static(path.join(__dirname,"..",'public')));
 
 // configuration for app to allow json format
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// database configration 
+// database configration
 var USER = require("./Database/user.js");
 var TICKET = require("./Database/tickets.js");
 var PARKING = require("./Database/parking.js");
 
+var sess;
+
 // set up router
 app.get('/', (req, res) =>{
-    responseClient(res, 400, 0, req.session);
-});
-
-app.post('/login', (req, res) =>{
-    var body = _.pick(req.body,["username", "ps"]);
-    if(!body.username){
-        return responseClient(res, 400, 0, "user name cannot be none!");
-    }
-
-    if(!body.ps){
-        return responseClient(res, 400, 0, "password cannot be none!");
-    }
-
-    var response = USER.compare(body);
-    if(response.result==-1){
-        responseClient(res, 400, 0, "User does not exist !");
-    }
-    else if(response.result==1){
-        req.session.userInfo = response.user;
-        responseClient(res, 200, 1, "Thanks for loging in !");
-    }else{
-        responseClient(res, 400, 0, "User name or password do not exist !");
-    }
+    responseClient(res, 200, 0, sess);
 });
 
 app.get('/userInfo', (req, res)=>{
-    if(req.session.userInfo){
-        responseClient(res, 200, 1, req.session.userInfo);
+    if(sess != undefined){
+        responseClient(res, 200, 1, sess.user);
     }else{
-        responseClient(res, 400, 0, "Please login !");
+        responseClient(res, 200, 0, "Please login !");
     }
 })
 
 app.get('/logout', (req, res)=>{
-    req.session.userInfo = undefined;
-    responseClient(res, 400, 1, "Please login !");
+    sess = req.session.destroy();
+    responseClient(res, 200, 1, "Please login !");
 })
+
+app.get('/getusertickets', (req, res) =>{
+    if(sess == undefined){
+        return responseClient(res, 200, 0, "unable to query data");
+    }else{
+      var response = TICKET.queryUserTicket(sess.user.email);
+      responseClient(res, 200, 1, response);
+    }
+
+})
+
+app.post('/login', (req, res) =>{
+    var body = _.pick(req.body,["username", "ps"]);
+    if(!body.username){
+        return responseClient(res, 200, 0, "user name cannot be none!");
+    }
+
+    if(!body.ps){
+        return responseClient(res, 200, 0, "password cannot be none!");
+    }
+
+    var response = USER.compare(body);
+    if(response.result==-1){
+        responseClient(res, 200, 0, "User does not exist !");
+
+    }
+    else if(response.result==1){
+        req.session.user = response.user;
+        // res.setHeader("Access-Control-Allow-Origin","*");
+        // res.send({"found":"1"})
+        sess = req.session;
+        sess.user = response.user
+        responseClient(res, 200, 1, req.session);
+    }else{
+        responseClient(res, 200, 0, "User name or password do not exist !");
+    }
+});
 
 app.post('/signup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
     var response = USER.insert(body);
     if(response.res==0){
-        responseClient(res, 400, response.res, `Username: ${body.username} exist, please choose another one !`); 
+        responseClient(res, 200, response.res, `Username: ${body.username} exist, please choose another one !`);
     }else{
         responseClient(res, 200, response.res, "Thanks for signup !");
     }
@@ -81,12 +104,14 @@ app.post('/signup', (req, res) =>{
 
 app.post('/buytickets', (req, res) =>{
     var body = _.pick(req.body,["value", "type", "expire", "email"]);
-    if(req.session.userInfo){
-        body.email = req.session.userInfo.email;
+    console.log(body);
+    body.email = "beck@beck.com";
+    if(req.session.user){
+        body.email = req.session.user.email;
     }
     var response = TICKET.grantTicket(body);
     if(response.res==0){
-        responseClient(res, 400, response.result, `Unable to process the request !`); 
+        responseClient(res, 200, response.result, `Unable to process the request !`);
     }else{
         responseClient(res, 200, response.response, "Your ticket is printed !");
     }
@@ -94,12 +119,12 @@ app.post('/buytickets', (req, res) =>{
 
 app.post('/buyparkingspot', (req, res) =>{
     var body = _.pick(req.body,["plate"]);
-    if(req.session.userInfo){
-        body.username = req.session.userInfo.username;
+    if(req.session.user){
+        body.username = req.session.user.username;
     }
     var response = PARKING.buyParking(body);
     if(response.result==0){
-        responseClient(res, 400, response.result, `Unable to process the request !`); 
+        responseClient(res, 200, response.result, `Unable to process the request !`);
     }else{
         responseClient(res, 200, response.result, "Your booked a parking spot !");
     }
@@ -117,6 +142,7 @@ app.post('/create_qrcode', (req, res) =>{
         res.end('<h1>414 Request-URI Too Large</h1>');
     }
 })
+
 
 
 

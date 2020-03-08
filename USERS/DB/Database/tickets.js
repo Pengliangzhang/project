@@ -15,7 +15,7 @@ var grantTicket = function(body) {
   )`;
   connection.query(createTICKET, (err, results, fields)=>{
     if(err){
-      console.log(err.message);      
+      console.log(err.message);
     }
   });
   var id = uniqid(), checked, result, identifier=id;
@@ -26,7 +26,7 @@ var grantTicket = function(body) {
       id = undefined;
       checked=0;
       result = 0;
-      return;      
+      return;
     }
     if(results){
       id = uniqid();
@@ -34,7 +34,7 @@ var grantTicket = function(body) {
     }
     checked=1;
   });
-  
+
   while(checked==undefined) {
     require('deasync').runLoopOnce();
   }
@@ -45,7 +45,7 @@ var grantTicket = function(body) {
       if(err){
         console.log(err.message);
         response = 0;
-        result = 0;      
+        result = 0;
       }
       result=1;
     });
@@ -58,7 +58,7 @@ var grantTicket = function(body) {
     connection.query(sql, (err, results, fields)=>{
       if(err){
         console.log(err.message);
-        return;      
+        return;
       }
       response = results[0];
     });
@@ -69,8 +69,26 @@ var grantTicket = function(body) {
   return {result, response};
 }
 
+var queryUserTicket = function(body) {
+  let sqlQuery = `SELECT * FROM TICKETS WHERE email='${body}'`;
+  // let sqlQuery = `SELECT * FROM TICKETS WHERE id='59v7e52rwk3cnmzqv'`;
+  var res;
+  connection.query(sqlQuery, (err, results, fields)=>{
+    if(err){
+      console.log(err.message);
+    }
+    res = results;
+  });
 
-module.exports = {
-  grantTicket: grantTicket
+  while(res==undefined) {
+    require('deasync').runLoopOnce();
+  }
+
+  return res;
 }
 
+
+module.exports = {
+  grantTicket: grantTicket,
+  queryUserTicket: queryUserTicket
+}

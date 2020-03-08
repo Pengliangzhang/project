@@ -4,6 +4,7 @@ module.exports = {
         responseData.code = code;
         responseData.message = message;
         responseData.data = data;
+        res.setHeader("Access-Control-Allow-Origin","*");
         res.status(httpCode).json(responseData)
     }
 }
