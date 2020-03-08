@@ -17,6 +17,7 @@ hbs.registerPartials(__dirname + "/../views/components/home");
 hbs.registerPartials(__dirname + "/../views/components/login");
 hbs.registerPartials(__dirname + "/../views/components/header");
 hbs.registerPartials(__dirname + "/../views/components/admin");
+hbs.registerPartials(__dirname + "/../views/components/fob");
 
 app.get("/", (req, res) => {
     res.status(200).render("./template/home/home.hbs");
@@ -28,6 +29,10 @@ app.get("/login", (req, res) => {
 
 app.get("/admin", (req, res) => {
     res.status(200).render("./template/admin/admin.hbs");
+});
+
+app.get("/deactivatefob", (req, res) => {
+    res.status(200).render("./template/fob/deactivate.hbs");
 });
 
 

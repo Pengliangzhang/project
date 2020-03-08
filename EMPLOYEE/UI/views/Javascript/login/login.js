@@ -24,7 +24,6 @@ function checkExistUser(){
             
             if(data.code == 1){
                 window.location.replace("/admin");
-                console.log(data)
             }else {
                 window.location.replace("/");
             }			

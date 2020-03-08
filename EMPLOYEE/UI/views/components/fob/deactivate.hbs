@@ -1,0 +1,14 @@
+<div class="container-fluid" >
+    <div class="row justify-content-md-center" id="activate_fob_container" style=" padding-top:10%">
+        <form id="deactivate_fob_form" action= "/deletefob" method="post">
+            <div class="form-group">
+                <label for="input_delete_fob">Please tap a fob</label>
+                <input type="text" name="fobid" class="form-control" id="input_delete_fob" aria-describedby="ticketHelp" placeholder="Fob" style="width:130%">
+                
+                <input class="form-control" id="deactivate_fob_feedback" type="text" placeholder="Please tap a fob " style="width:130%" readonly>
+                <small id="emailHelp" class="form-text text-muted">Thanks for visiting our park.</small>
+            </div>            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

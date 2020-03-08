@@ -28,19 +28,32 @@ $(document).ready(function(){
         $("#verify_ticket_container").show();
     });
 
-    // $("#applicant_registerform").submit(function () {
-    //     var form = $(this);
-    //     $.ajax({
-    //         url: requestURL+'/verifytickets',
-    //         method: form.attr('method'),
-    //         data: form.serialize(),
-    //         success: function (data) {
-    //             console.log(data);
-    //             $("#verify_ticket_container").hide();
-    //             $("#activate_fob_container").show();
-    //         }
-    //      });
-    // })
+    $("#activate_fob_form").submit(function (e) {
+        event.preventDefault();
+        $('#input_ticket_fob').val(ticketID);
+        $.ajax({
+            url: requestURL + '/activatefob',
+            method:"POST",
+            data:$('#activate_fob_form').serialize(),
+            success: function(data) {
+                if(data.code == 1){
+                    $('#input_ticket_id').val('');
+                    $('#input_register_fob').val('');
+                    $("#verify_ticket_container").show();
+                    $("#activate_fob_container").hide();
+                    $("#verify_ticket_feedback").attr("placeholder", "Please scan a ticket ");
+                    $("#register_fob_feedback").attr("placeholder", "Please tap a fob ");
+                    ticketID = undefined;                
+                }else{
+                    $("#register_fob_feedback").attr("placeholder", data.message);
+                    $('#input_register_fob').val('');
+                }            
+            },
+            fail : function(data){
+                console.log("Fail: " + data);
+            }
+        })
+    })
 })
 
 var ticketID;
@@ -56,35 +69,10 @@ function submitVerifyTicket(){
                 $("#verify_ticket_container").hide();
                 $("#activate_fob_container").show();
                 ticketID = $('#input_ticket_id').val();
+                $("#input_register_fob").val("");
             }else{
                 $('#input_ticket_id').val('');
             }
-        },
-        fail : function(data){
-            console.log("Fail: " + data);
-        }
-    })
-}
-
-function submitActivateFob(){
-    $('#input_ticket_fob').val(ticketID);
-    $.ajax({
-        url: requestURL + '/activatefob',
-        method:"POST",
-        data:$('#activate_fob_form').serialize(),
-        success: function(data) {
-            if(data.code == 1){
-                $('#input_ticket_id').val('');
-                $('#input_register_fob').val('');
-                $("#verify_ticket_container").show();
-                $("#activate_fob_container").hide();
-                $("#verify_ticket_feedback").attr("placeholder", "Please scan a ticket ");
-                $("#register_fob_feedback").attr("placeholder", "Please tap a fob ");
-                ticketID = undefined;                
-            }else{
-                $("#register_fob_feedback").attr("placeholder", data.message);
-                $('#input_register_fob').val('');
-            }            
         },
         fail : function(data){
             console.log("Fail: " + data);
