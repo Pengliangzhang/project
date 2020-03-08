@@ -6,6 +6,9 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path");
 var responseClient = require('./Public/util').responseClient;
+var qr = require('qr-image');
+
+const PORT = process.env.PORT || 3000;
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
@@ -16,7 +19,7 @@ app.use(session({
     cookie:{maxAge: 60 * 1000 * 30} //30 mins for session expired
 }))
 
-app.use('/',express.static(path.join(__dirname,"..",'public')));
+app.use('/public',express.static(path.join(__dirname,"..",'public')));
 
 // configuration for app to allow json format
 app.use(bodyParser.json());
@@ -24,22 +27,21 @@ app.use(bodyParser.json());
 // database configration 
 var USER = require("./Database/user.js");
 var TICKET = require("./Database/tickets.js");
+var PARKING = require("./Database/parking.js");
 
 // set up router
 app.get('/', (req, res) =>{
-    console.log("Established a connection !");
-    res.send("Hello youtube");
-    
+    responseClient(res, 400, 0, req.session);
 });
 
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
     if(!body.username){
-        responseClient(res, 400, 0, "user name cannot be none!");
+        return responseClient(res, 400, 0, "user name cannot be none!");
     }
 
     if(!body.ps){
-        responseClient(res, 400, 0, "password cannot be none!");
+        return responseClient(res, 400, 0, "password cannot be none!");
     }
 
     var response = USER.compare(body);
@@ -77,7 +79,7 @@ app.post('/signup', (req, res) =>{
     }
 });
 
-app.post('/tickets', (req, res) =>{
+app.post('/buytickets', (req, res) =>{
     var body = _.pick(req.body,["value", "type", "expire", "email"]);
     if(req.session.userInfo){
         body.email = req.session.userInfo.email;
@@ -90,29 +92,35 @@ app.post('/tickets', (req, res) =>{
     }
 });
 
-app.post('/issuetickets', (req, res) =>{
-    var body = _.pick(req.body,["id", "email"]);
-    var response = TICKET.issue(body);
-    // console.log(response)
-    // if(response.res==0){
-        responseClient(res, 400, "", `Unable to process the request !`); 
-    // }else{
-    //     responseClient(res, 200, "", "Your ticket is printed !");
-    // }
+app.post('/buyparkingspot', (req, res) =>{
+    var body = _.pick(req.body,["plate"]);
+    if(req.session.userInfo){
+        body.username = req.session.userInfo.username;
+    }
+    var response = PARKING.buyParking(body);
+    if(response.result==0){
+        responseClient(res, 400, response.result, `Unable to process the request !`); 
+    }else{
+        responseClient(res, 200, response.result, "Your booked a parking spot !");
+    }
 });
 
-app.post('/payment', (req, res) =>{
-    var body = _.pick(req.body,["ps", "username", "email"]);
-    var response = USER.insert(body);
-    res.end("Thanks !")
-});
+app.post('/create_qrcode', (req, res) =>{
+    var body = _.pick(req.body,["id"]);
+    var text = body.id;
+    try {
+        var img = qr.image(text,{size :10});
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        img.pipe(res);
+    } catch (e) {
+        res.writeHead(414, {'Content-Type': 'text/html'});
+        res.end('<h1>414 Request-URI Too Large</h1>');
+    }
+})
+
 
 
 // establish HTTP connection
-app.listen(3000, () =>{
-    console.log("My REST API is running on port 3000 !");
+app.listen(PORT, () =>{
+    console.log(`My REST API is running on port ${PORT} !`);
 })
-
-// app.listen(3000, "192.168.56.1", () =>{
-//     console.log("My REST API is running on LAN port 3000 !");
-// })

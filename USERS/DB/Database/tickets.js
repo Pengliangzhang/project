@@ -69,66 +69,8 @@ var grantTicket = function(body) {
   return {result, response};
 }
 
-var issueTicket = function(body) {
-  var result, status, sql, update, checked;
-  if(body.id){
-    update = `UPDATE TICKETS 
-           SET valid='false'
-           WHERE id='${body.id}'`;
-    sql = `SELECT * FROM TICKETS WHERE id='${body.id}'`;
-    checked=1;
-  }else if(body.email){
-    update = `UPDATE TICKETS 
-           SET valid='false'
-           WHERE email=${body.email}`;
-    sql = `SELECT * FROM TICKETS WHERE email='${body.email}'`;
-    checked=1;
-  }else{
-    status = 0, result=0;
-    checked=1;
-  }
-  while(checked==undefined) {
-    require('deasync').runLoopOnce();
-  }
-  var found;
-  if(status!=0){
-    connection.query(sql, (err, results, fields)=>{
-      if(err){
-        console.log(err);
-        status = 0, result=0;
-        return;
-      }
-      found = results;
-    })
-  }
-  while(found==undefined) {
-    require('deasync').runLoopOnce();
-  }
-  if(!found[0].valid){
-    status = 0, result=0;
-  }
-  connection.query(sql, (err, results, fields)=>{
-    if(err){
-      console.log(err.message);
-      status = 0;
-      result = 0;
-      return;      
-    }
-    // console.log(results)
-    result = results;
-    status = 1;
-  });
-  
-  while(result==undefined || status==undefined) {
-    require('deasync').runLoopOnce();
-  }
-  console.log(status+ " " + result)
-  return {status, result};
-}
-
 
 module.exports = {
-  grantTicket: grantTicket,
-  issue:issueTicket
+  grantTicket: grantTicket
 }
 
