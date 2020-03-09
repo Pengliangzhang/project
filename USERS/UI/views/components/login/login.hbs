@@ -1,0 +1,18 @@
+<div class="container-fluid" >
+
+    <div class="row justify-content-md-center" id="user_login_container" style="padding-top:10%;">
+        <form id="user_login_form" action= "/login" method="post">
+            <div class="form-group">
+                <label for="input_username">Please scan a valid ticket !</label>
+                <input type="text" name="username" class="form-control" id="input_username" aria-describedby="ticketHelp" placeholder="Username" style="width:100%" required>
+
+                <label for="input_ps">Please scan a valid ticket !</label>
+                <input type="password" name="ps" class="form-control" id="input_ps" aria-describedby="ticketHelp" placeholder="Password" style="width:100%" required>
+
+                <input class="form-control" id="verify_ticket_feedback" type="text" placeholder="Please enter required information " style="width:130%" readonly>
+                <small id="emailHelp" class="form-text text-muted">We provide best services.</small>
+            </div>            
+            <button type="button" onclick="checkExistUser()" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

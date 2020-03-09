@@ -1,0 +1,119 @@
+<div class="container-fluid" >
+    <div class="row" id="admin_button_container" style="display: none;">
+        <button type="button" class="col-3 btn btn-primary" id="buy_ticket_button">Buy tickets</button>
+        <button type="button" class="col-3 btn btn-success" id="buy_parking_button">Buy parking spot</button>
+        <button type="button" class="col-3 btn btn-warning" id="load_ticket_button">Load tickets</button>
+        <button type="button" class="col-3 btn btn-info" id="">Reserve a locker</button>
+    </div>
+
+    <div class="row justify-content-md-center" id="buy_ticket_container" style="display: none; padding-top:10%;">
+        <form id="buy_ticket_form" action= "/buytickets" method="post">
+            <div class="form-group">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="value" id="Radios1" value="190" checked>
+                    <label class="form-check-label" for="Radios1">
+                        Ticket price:   $ 190
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="type" id="Radios2" value="1" checked>
+                    <label class="form-check-label" for="Radios2">
+                        Ticket type: Adult
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateSelection">Please select your desired date</label>
+                <select class="form-control" id="dateSelection" name="expire">
+                    <option value="2020-03-21">2020-03-21</option>
+                    <option value="2020-03-22">2020-03-22</option>
+                    <option value="2020-03-23">2020-03-23</option>
+                    <option value="2020-03-24">2020-03-24</option>
+                    <option value="2020-03-25">2020-03-25</option>
+                    <option value="2020-03-26">2020-03-26</option>
+                    <option value="2020-03-27">2020-03-27</option>
+                </select>
+            </div>            
+
+            <div class="form-group">
+                <small id="emailHelp" class="form-text text-muted">We provide best services.</small>
+            </div>
+            <button type="button" onclick="submitBuyTicket()" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="row justify-content-md-center" id="buy_parking_container" style="display: none; padding-top:10%">
+        <form id="buy_parking_form" action= "/buyparkingspot" method="post">
+            <div class="form-group">
+                <label for="input_register_plate">Please enter your vehicle plate</label>
+                <input type="text" name="plate" class="form-control" id="input_register_plate" aria-describedby="plateHelp" placeholder="Plate" style="width:130%">
+                <input class="form-control" id="buy_plate_feedback" type="text" placeholder="Please enter your vehicle plate " style="display:none; width:130%" readonly>
+                <small id="plateHelp" class="form-text text-muted">We provide best services.</small>
+            </div>            
+            <button type="button" onclick="submitBuyParking()"  class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="row justify-content-md-center" id="buy_parking_container" style="display: none; padding-top:10%">
+        <form id="buy_parking_form" action= "/buyparkingspot" method="post">
+            <div class="form-group">
+                <label for="input_register_plate">Please enter your vehicle plate</label>
+                <input type="text" name="plate" class="form-control" id="input_register_plate" aria-describedby="plateHelp" placeholder="Plate" style="width:130%">
+                <input class="form-control" id="buy_plate_feedback" type="text" placeholder="Please enter your vehicle plate " style="display:none; width:130%" readonly>
+                <small id="plateHelp" class="form-text text-muted">We provide best services.</small>
+            </div>            
+            <button type="button" onclick="submitBuyParking()"  class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <div class="row justify-content-md-center" id="response_container" style="display:none; padding-top:10%">
+        <div id="response_p_1"><img src="" id="response_qr" alt="QR" height="200px" width="200px"></div>
+
+    </div>
+
+
+    <div class="row" id="load_tickets_container" style="display:none">
+         <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ticket ID</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Expire Date</th>
+                    <th scope="col">Validate</th>
+                    <th scope="col">eTicket </th>
+                </tr>
+            </thead>
+            <tbody id="load_tickets_table">
+
+            </tbody>
+        </table>
+    </div>
+
+    {{!-- <div class="row justify-content-md-center"> --}}
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width: auto; margin: auto;padding: 10px;">
+            <div class="modal-dialog row justify-content-md-center" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">eTicket</h5>
+                        <button type="button" class="close" id="close_modal" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" id="modal_qr" alt="QR" height="200px" width="200px"></img>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{!-- </div>   --}}
+
+</div>

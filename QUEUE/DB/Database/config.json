@@ -1,0 +1,10 @@
+{
+    "_comment": "This is the configuration to the db",
+    "db": {
+        "host"     : "project-datebase.c2sslqw871wc.us-west-1.rds.amazonaws.com",
+        "user"     : "admin",
+        "password" : "12345678",
+        "port"     : 3306,
+        "database" : "project"
+    }
+}
