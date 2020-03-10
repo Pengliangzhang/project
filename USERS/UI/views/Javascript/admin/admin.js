@@ -18,7 +18,6 @@ $(document).ready(function(){
             console.log("Fail: " + data);
         }
     })
-     
      $("#load_ticket_button").click(function () {
         $("#load_tickets_container").show();
         $("#buy_parking_container").hide();

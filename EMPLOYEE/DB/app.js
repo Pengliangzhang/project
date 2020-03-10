@@ -7,7 +7,7 @@ const session = require("express-session");
 const path = require("path");
 var responseClient = require('./Public/util').responseClient;
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3005;
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));

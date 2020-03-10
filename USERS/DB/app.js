@@ -11,11 +11,11 @@ var responseClient = require('./Public/util').responseClient;
 var qr = require('qr-image');
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // setup cros
 var corsOptions = {
-  origin: 'http://localhost:2999',
+  origin: 'http://localhost:3000',
   credentials: true,
   maxAge: '900000'
 }
