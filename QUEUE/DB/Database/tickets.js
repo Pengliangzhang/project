@@ -11,7 +11,8 @@ var grantTicket = function(body) {
     value int not null,
     type int not null,
     expire DATE not null,
-    valid boolean default true
+    valid boolean default true,
+    inside boolean NOT NULL DEFAULT false
   )`;
   connection.query(createTICKET, (err, results, fields)=>{
     if(err){

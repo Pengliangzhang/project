@@ -43,15 +43,23 @@ app.use(bodyParser.json());
 // database configration
 var queue = require("./Database/queue.js");
 var count = 0;
-// setInterval((()=>{
-//     count++;
-//     console.log("set interval is working ! " + count);
-//     console.log()
-// }), 5000, Date.now())
+
+queue.newTables();
+
+setInterval((()=>{
+    count++;
+    var response = queue.queueTransferToWait();
+    console.log("Done ");
+    var now = new Date();
+    console.log(now);
+    console.log("Round: " + count + ", following people please come to the waitting zone !");
+    console.log(response);
+    console.log();
+}), 180000)
 
 // set up router
 app.get('/', (req, res) =>{
-    responseClient(res, 200, 0, req.session);
+    responseClient(res, 200, 0, `Thanks for using queuing db`);;
 });
 
 app.post('/enqueue', (req, res) =>{
@@ -61,7 +69,6 @@ app.post('/enqueue', (req, res) =>{
     var isNUM = /^\d+$/.test(body.id);
 
     var response = queue.enqueue(body);
-    console.log(response);
     if (response.res == 1) {
         responseClient(res, 200, 1, response.result);
     } else if(response.res == 0) {
@@ -71,14 +78,34 @@ app.post('/enqueue', (req, res) =>{
     }
 });
 
-app.post('/dequeue', (req, res) =>{
-    var body = _.pick(req.body,["id"]);
-    var response = USER.insert(body);
 
-    responseClient(res, 200, response.res, "Thanks for signup !");
-
+app.post('/dequeueFROMwait', (req, res) =>{
+    var body = _.pick(req.body,["id", "facility"]);
+    var response = queue.dequeueFROMwait(body);
+    if(response.response.affectedRows == 1){
+        responseClient(res, 200, 0, "Welcome to " + body.facility);
+    }else{
+        responseClient(res, 200, 0, "Cannot find the information in this queue line");
+    }
 });
 
+app.post('/updateposition', (req, res) =>{
+    var body = _.pick(req.body,["id", "facility"]);
+    // body.facility:   1: program one
+    //                  2: program two
+
+    var response = queue.updateposition(body);
+    if(response >= 0){
+        responseClient(res, 200, 1, response);
+    } else {
+        responseClient(res, 200, 0, "You are not in the queue");
+    }
+});
+
+app.get('/queryqueue', (req, res) =>{
+    var response = queue.queryQueue();
+    responseClient(res, 200, 1, response);
+});
 
 // establish HTTP connection
 app.listen(PORT, () =>{
