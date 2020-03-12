@@ -44,6 +44,7 @@ app.use(bodyParser.json());
 var USER = require("./Database/user.js");
 var TICKET = require("./Database/tickets.js");
 var PARKING = require("./Database/parking.js");
+var QUEUE = require("./Database/queue.js");
 
 var sess;
 
@@ -76,6 +77,23 @@ app.get('/getusertickets', (req, res) =>{
       responseClient(res, 200, 1, response);
     }
 
+})
+
+app.get('/getqueue', (req, res) =>{
+    if(req.session.user == undefined){
+        return responseClient(res, 200, 0, "unable to query data");
+    }else{
+      var responseIDs = QUEUE.queryUSERs(req.session.user.email);
+      
+      for(var i=0; i<responseIDs.results.length; i++) {
+            // console.log(responseIDs.results[i].id)
+            var responseQUEUE = QUEUE.updateposition(responseIDs.results[i].id, 'rollercoaster');
+            console.log(responseIDs.results[i].id + " num of visitors in front " +responseQUEUE.result)
+            console.log();
+      }
+        
+      responseClient(res, 200, 1, responseIDs);
+    }
 })
 
 app.post('/login', (req, res) =>{

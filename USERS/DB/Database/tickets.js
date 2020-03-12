@@ -83,7 +83,6 @@ var queryUserTicket = function(body) {
   while(res==undefined) {
     require('deasync').runLoopOnce();
   }
-
   return res;
 }
 
