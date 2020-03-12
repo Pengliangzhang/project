@@ -267,7 +267,6 @@ var queryQueueAndWaitting = function(){
 
 module.exports = {
   enqueue: enqueue,
-  updateposition: updateposition,
   queueTransferToWait: queueTransferToWait,
   dequeueFROMwait: dequeueFROMwait,
   newTables: newTables,
