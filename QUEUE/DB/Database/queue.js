@@ -1,10 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
-const configAli = require("./configAli");
 const uniqid = require('uniqid');
 
-// var connection = mysql.createConnection(config.db);
-var connection = mysql.createConnection(configAli.db);
+const connection = require("./connection.js").connection;
 
 var enqueue = function(body) {
     let id=body.id, facility=body.facility;

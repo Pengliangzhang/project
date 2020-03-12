@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const uniqid = require('uniqid');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var verifyTicket = function(body) {
   var sql, update;
@@ -30,7 +28,7 @@ var verifyTicket = function(body) {
       found = results;
     })
   }
-  
+
   while(found==undefined) {
     require('deasync').runLoopOnce();
   }
@@ -57,7 +55,7 @@ var verifyTicket = function(body) {
         status = 1;
       });
     }
-  
+
     while(result==undefined || status==undefined) {
       require('deasync').runLoopOnce();
     }

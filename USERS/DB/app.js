@@ -84,15 +84,26 @@ app.get('/getqueue', (req, res) =>{
         return responseClient(res, 200, 0, "unable to query data");
     }else{
       var responseIDs = QUEUE.queryUSERs(req.session.user.email);
-      
+      var response = [];
       for(var i=0; i<responseIDs.results.length; i++) {
             // console.log(responseIDs.results[i].id)
             var responseQUEUE = QUEUE.updateposition(responseIDs.results[i].id, 'rollercoaster');
-            console.log(responseIDs.results[i].id + " num of visitors in front " +responseQUEUE.result)
-            console.log();
+            var msg;
+            // console.log(responseIDs.results[i].id + " num of visitors in front " + responseQUEUE.result)
+            if(responseQUEUE.result == -1){
+                var msg = "You do not in the queue !"
+            } else if (responseQUEUE.result == -2) {
+                msg = "Please come to the waitting zone!"
+            } else if (responseQUEUE.result >= 0) {
+                msg = "There has " + responseQUEUE.result + " in front of you. "
+            } else {
+                msg = "There has " + responseQUEUE.result + " in front of you. "
+            }
+            var json = {id: responseIDs.results[i].id, msg: msg}
+            response[i] = json;
       }
         
-      responseClient(res, 200, 1, responseIDs);
+      responseClient(res, 200, 1, response);
     }
 })
 

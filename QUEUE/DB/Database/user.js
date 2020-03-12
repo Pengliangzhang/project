@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const QuickEncrypt = require('quick-encrypt');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var parserUser = function(body) {
   // Encrypt
@@ -28,12 +26,12 @@ var parserUser = function(body) {
   // create table USERS if not exist
   connection.query(createUSER, (err, results, fields)=>{
     if(err){
-      console.log(err.message);      
+      console.log(err.message);
     }
   });
   connection.query(createPASS, (err, results, fields)=>{
     if(err){
-      console.log(err.message);      
+      console.log(err.message);
     }
   });
   var duplicate, res, user; // if success, res=1; if fail, res=0
@@ -86,7 +84,7 @@ var comparePASS = function(body) {
     if(err){
       console.log(err.message);
       comp=-1; user=0;result=0;
-      return;      
+      return;
     }
     while(USER == undefined) {
       require('deasync').runLoopOnce();
@@ -101,7 +99,7 @@ var comparePASS = function(body) {
     var sqlPASS = `SELECT * FROM PASS WHERE id='${id}'`;
     connection.query(sqlPASS, (err, PASS, fields)=>{
       if(err){
-        console.log(err.message);      
+        console.log(err.message);
       }
       let pass=PASS[0].password;
       let private=PASS[0].privatekey;
@@ -113,14 +111,14 @@ var comparePASS = function(body) {
       }else{
         result=0;
         user=0;
-      }   
+      }
     })
   })
   while(comp == undefined || user == undefined || result==undefined) {
       require('deasync').runLoopOnce();
   }
   return {result, user};
-} 
+}
 
 
 module.exports = {

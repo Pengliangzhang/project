@@ -1,10 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
-const configAli = require("./configAli");
 const uniqid = require('uniqid');
 
-var connection = mysql.createConnection(config.db);
-// var connection = mysql.createConnection(configAli.db);
+const connection = require("./connection.js").connection;
 
 var queryUSERs = function(body) {
     var email = body;
@@ -64,7 +60,6 @@ var updateposition = function(inputID, inputFacility){
 
     if(current == -1){
         // try to query whether the ticketID in the waitting zone, when the ticket not in the queue
-        console.log(current)
         connection.query(queryWaittingZone, (err, results, fields)=>{
             if(err){
               console.log(err.message);
@@ -83,9 +78,9 @@ var updateposition = function(inputID, inputFacility){
       require('deasync').runLoopOnce();
     }
 
-    console.log("First: " + first);
-    console.log("Wait: " + wait);
-    console.log("Current: " + current);
+    // console.log("First: " + first);
+    // console.log("Wait: " + wait);
+    // console.log("Current: " + current);
     if(current != -1){ // if already in the queue
       result = current - first; // result is the num of people in front of
     }else if (wait == 1){ // if already in the waitting zone

@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const QuickEncrypt = require('quick-encrypt');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var parserUser = function(body) {
   // Encrypt
@@ -41,7 +39,7 @@ var parserUser = function(body) {
   var duplicate, res, user;
   // {res} if success, res=1; if fail, res=0
   // {duplicate} check exist username, 1=exist; 0=not exist;
-  
+
   connection.query(sqlSelect, (err, result) => {
     if(err){
       console.log(err);

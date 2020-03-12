@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const uniqid = require('uniqid');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var buyParkingSPOT = function(body) {
     let createTICKET = `create table if not exists PARKING(
@@ -11,7 +9,7 @@ var buyParkingSPOT = function(body) {
       plate varchar(255) not null,
       FOREIGN KEY (username) REFERENCES USERS(username)
     )`;
-    
+
     var id = uniqid(), response, result;
     // result: 1=success, 0=fail
     // response sopt info
@@ -20,7 +18,7 @@ var buyParkingSPOT = function(body) {
 
     connection.query(createTICKET, (err, results, fields)=>{
       if(err){
-        console.log(err.message);      
+        console.log(err.message);
       }
     });
 

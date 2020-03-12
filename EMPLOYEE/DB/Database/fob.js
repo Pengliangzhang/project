@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const QuickEncrypt = require('quick-encrypt');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var activateFOB = function(body) {
 

@@ -1,8 +1,6 @@
-const mysql = require('mysql');
-const config = require("./config");
 const uniqid = require('uniqid');
 
-var connection = mysql.createConnection(config.db);
+const connection = require("./connection.js").connection;
 
 var grantTicket = function(body) {
   let createTICKET = `create table if not exists TICKETS(
