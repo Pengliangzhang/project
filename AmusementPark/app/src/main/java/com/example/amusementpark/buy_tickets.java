@@ -28,11 +28,11 @@ public class buy_tickets extends AppCompatActivity {
     private TextView mydisplayDate;
     private DatePickerDialog.OnDateSetListener mydateSetListener;
     private Spinner ticketTypeSpinner, ticketNumSpinner;
-    private String date, type, price;
+    private String date, type, price,number;
     private int t;
     private Button addtocart_btn;
     private ImageView cartimage;
-    private Ticket ticket = new Ticket(type,date,price);
+    //private Ticket ticket = new Ticket(type,date,price);
     private Intent intent = new Intent();
     private ArrayList<Ticket> mylist = new ArrayList<>();
 
@@ -93,6 +93,21 @@ public class buy_tickets extends AppCompatActivity {
                 getResources().getStringArray(R.array.NumOfTickets));
         ticketNumSpinner.setAdapter(ticketNumAdapter);
 
+        //ticketNumSpinner set OnItemselect: remember the number of ticket
+        ticketNumSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                 number = ticketNumSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
 
 
 
@@ -129,7 +144,7 @@ public class buy_tickets extends AppCompatActivity {
                 System.out.println("type: "+type);
                 System.out.println("price: "+price);
                 System.out.println("date: "+date);
-                ticket = new Ticket(type,date,price);
+                Ticket ticket = new Ticket(type,date,price,number);
                 //intent.putExtra("Ticket", ticket);
                 mylist.add(ticket);
                 System.out.println("mylist size: "+mylist.size());
@@ -142,7 +157,7 @@ public class buy_tickets extends AppCompatActivity {
             }
         });
 
-        //Make cart_ImageView clickable
+        //Make cart_ImageView clickable, to next activity: my cart
         cartimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

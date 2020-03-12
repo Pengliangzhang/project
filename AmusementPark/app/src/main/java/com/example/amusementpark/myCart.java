@@ -22,7 +22,6 @@ import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -30,12 +29,13 @@ import java.util.zip.Inflater;
 public class myCart extends AppCompatActivity {
 
     private Button next_btn;
-    int[] image = {R.drawable.ticket,R.drawable.ticket};
+    //int[] image = {R.drawable.ticket,R.drawable.ticket};
     //String[] type = {"Student","Adult"};
     //String[] price = {"$15","$20"};
     //String[] remove ={"remove","remove"};
     private ArrayList<Ticket> mylist = new ArrayList<>();
     private Ticket ticket;
+    private String ticketNumber;
     //String date,type,price;
 
 
@@ -139,35 +139,43 @@ public class myCart extends AppCompatActivity {
             TextView t_type = (TextView) convertView.findViewById(R.id.listview_type);
             TextView t_price = (TextView) convertView.findViewById(R.id.listview_price);
             TextView t_date = (TextView) convertView.findViewById(R.id.listview_date);
-            ImageView t_delete = (ImageView) convertView.findViewById(R.id.listview_remove);
+            ImageView t_delete = (ImageView) convertView.findViewById(R.id.listview_remove); //final
             Spinner t_numSpinner = (Spinner) convertView.findViewById(R.id.listview_num);
             ImageView t_image = (ImageView) convertView.findViewById(R.id.listview_image);
 
             //System.out.println(position);
-
-            //Set ticket numbers adapter
-            ArrayAdapter<String> ticketNumAdapter = new ArrayAdapter<String>(
-                    myCart.this,
-                    android.R.layout.simple_list_item_1,
-                    getResources().getStringArray(R.array.NumOfTickets));
-
 
             t_type.setText(mylist.get(position).getType());
             System.out.println(t_type.toString());
             t_date.setText(mylist.get(position).getDate());
             t_price.setText(mylist.get(position).getPrice());
 
-
             t_delete.setImageResource(R.drawable.delete);
-            t_numSpinner.setAdapter(ticketNumAdapter);
+            //t_numSpinner.setAdapter(ticketNumAdapter);
             t_image.setImageResource(R.drawable.ticket4);
 
+            /*
+            *  Display the same ticket number in shopping cart as selected in the previous activity.
+            */
+            //Number of tickets from the previous activity
+            ticketNumber = mylist.get(position).getNumber();
+            //Set ticket numbers adapter
+            ArrayAdapter<CharSequence> Num_adapter = ArrayAdapter.createFromResource(myCart.this, R.array.NumOfTickets, android.R.layout.simple_list_item_1);
+            Num_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            t_numSpinner.setAdapter(Num_adapter);
+            if (ticketNumber != null) {
+                int spinnerPosition = Num_adapter.getPosition(ticketNumber);
+                t_numSpinner.setSelection(spinnerPosition);
+            }
 
 
-            //Delete ticket function
+
+
+            /* Delete ticket function */
             t_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                
 
                 }
             });
@@ -177,33 +185,14 @@ public class myCart extends AppCompatActivity {
 
 
 
-            //Set up each info.
-            /*
-            t_type.setText(type[position]);
-            t_price.setText(price[position]);
-            t_date.setText("here is date");
-            t_delete.setImageResource(R.drawable.delete);
-            t_numSpinner.setAdapter(ticketNumAdapter);
-            t_image.setImageResource(image[position]);
-             */
-
-            /*
-            System.out.println(position);
-
-            t_type.setText(mylist.get(position).getType());
-            t_date.setText(mylist.get(position).getDate());
-            t_price.setText(mylist.get(position).getPrice());
-            t_delete.setImageResource(R.drawable.delete);
-            t_numSpinner.setAdapter(ticketNumAdapter);
-            t_image.setImageResource(R.drawable.ticket4);
-             */
 
 
 
 
 
 
-            //return convertView;
+
+
         }
 
 

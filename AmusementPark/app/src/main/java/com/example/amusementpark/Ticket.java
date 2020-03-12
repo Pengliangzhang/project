@@ -7,11 +7,13 @@ public class Ticket implements Serializable {
     private String Type;
     private String Date;
     private String Price;
+    private String Number;
 
-    public Ticket(String type, String date, String price) {
+    public Ticket(String type, String date, String price, String number) {
         Type = type;
         Date = date;
         Price = price;
+        Number = number;
     }
 
     public String getType() {
@@ -37,4 +39,8 @@ public class Ticket implements Serializable {
     public void setPrice(String price) {
         Price = price;
     }
+
+    public String getNumber(){ return Number; }
+
+   public  void setNumber(String number){ Number = number; }
 }
