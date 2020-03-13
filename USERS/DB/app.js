@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 
 // setup cros
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000, ',
   credentials: true,
   maxAge: '900000'
 }

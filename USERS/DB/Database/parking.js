@@ -1,6 +1,6 @@
 const uniqid = require('uniqid');
 
-const connection = require("./connection");
+const connection = require("./connection.js").connection;
 
 
 var buyParkingSPOT = function(body) {
