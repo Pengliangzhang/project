@@ -146,6 +146,16 @@ public class buy_tickets extends AppCompatActivity {
                 System.out.println("date: "+date);
                 Ticket ticket = new Ticket(type,date,price,number);
                 //intent.putExtra("Ticket", ticket);
+
+                /*
+                if(mylist!=null){
+                    mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
+                    System.out.println("mylist size: "+mylist.size());
+                    System.out.println("---------------------------------");
+                }
+
+                 */
+
                 mylist.add(ticket);
                 System.out.println("mylist size: "+mylist.size());
 

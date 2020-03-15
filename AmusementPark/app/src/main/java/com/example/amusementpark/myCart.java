@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,7 +23,6 @@ import com.baoyachi.stepview.bean.StepBean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 @SuppressWarnings("unchecked")
 public class myCart extends AppCompatActivity {
@@ -34,9 +33,7 @@ public class myCart extends AppCompatActivity {
     //String[] price = {"$15","$20"};
     //String[] remove ={"remove","remove"};
     private ArrayList<Ticket> mylist = new ArrayList<>();
-    private Ticket ticket;
     private String ticketNumber;
-    //String date,type,price;
 
 
 
@@ -72,6 +69,7 @@ public class myCart extends AppCompatActivity {
 
         /* Add List view in myCart*/
         ListView myListView = (ListView) findViewById(R.id.mycart_listview);
+        //ScrollView myListView = (ScrollView) findViewById(R.id.mycart_listview);
         cartAdapter adapter = new cartAdapter();
         myListView.setAdapter(adapter);
 
@@ -85,7 +83,7 @@ public class myCart extends AppCompatActivity {
         //ticket = (Ticket) getIntent().getSerializableExtra("Ticket");
 
         mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
-        System.out.println(mylist.size());
+        //System.out.println(mylist.size());
 
 
 
@@ -113,11 +111,17 @@ public class myCart extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return mylist.size();
+            if(mylist==null){
+                return 0;
+            }else {
+                return mylist.size();
+            }
+
         }
 
         @Override
         public Object getItem(int position) {
+
             return mylist.get(position);
         }
 
@@ -127,7 +131,7 @@ public class myCart extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             if( convertView == null ){
                 //We must create a View:
@@ -142,6 +146,7 @@ public class myCart extends AppCompatActivity {
             ImageView t_delete = (ImageView) convertView.findViewById(R.id.listview_remove); //final
             Spinner t_numSpinner = (Spinner) convertView.findViewById(R.id.listview_num);
             ImageView t_image = (ImageView) convertView.findViewById(R.id.listview_image);
+            final Object o = getItem(position);
 
             //System.out.println(position);
 
@@ -172,26 +177,19 @@ public class myCart extends AppCompatActivity {
 
 
             /* Delete ticket function */
+            //individual delete
             t_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                
+                    mylist.remove(position);
+                    refresh();
+                    //refresh2();
+
+
 
                 }
             });
-
-
             return convertView;
-
-
-
-
-
-
-
-
-
-
 
         }
 
@@ -199,4 +197,25 @@ public class myCart extends AppCompatActivity {
 
     }
 
+    /*
+       refresh page
+      */
+    private void refresh() {
+        finish();
+        Intent intent1 = new Intent(this, myCart.class);
+        intent1.putExtra("mylist", mylist);
+        System.out.println("my list size now: "+mylist.size());
+        startActivity(intent1);
+
+    }
+
+    /*
+    private void refresh2() {
+        finish();
+        Intent intent2 = new Intent(this, buy_tickets.class);
+        intent2.putExtra("mylist", mylist);
+        startActivity(intent2);
+    }
+
+     */
 }
