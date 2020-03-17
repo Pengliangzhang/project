@@ -61,6 +61,8 @@ public class parking extends AppCompatActivity {
                     toast("confirmed");
                     intent.putExtra("username", username);
                     intent.putExtra("sessionID", sessionID);
+                    intent.putExtra("plateNumber",msg.obj.toString());
+                    System.out.println("message -> session ID = "+ msg.obj);
                     startActivity(intent);
                     break;
                 case FAIL:
@@ -92,6 +94,12 @@ public class parking extends AppCompatActivity {
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
         sessionID=getIntent.getStringExtra("sessionID");
+        plateNumber=getIntent.getStringExtra("plateNumber");
+
+        if(plateNumber!=null){
+            et_plate_number.setText(plateNumber);
+        }
+
         System.out.println("session ID from previous page = "+ sessionID);
         System.out.println("username from previous page = " + username);
 
@@ -228,8 +236,8 @@ public class parking extends AppCompatActivity {
                         System.out.println("result code from server: "+ res);
                         if (res == 0) {
                             message.what = FAIL;
-
                         } else if (res == 1) {
+                            message.obj=plateNumber;
                             message.what = SUCCESS;
                         }
                     }
