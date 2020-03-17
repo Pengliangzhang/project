@@ -26,7 +26,7 @@
         <activity android:name=".register"></activity>
         <activity android:name=".functions"></activity>
         <activity android:name=".forgetPassword"></activity>
-        <activity android:name=".account"></activity>
+        <activity android:name=".account"></activity>1
         <activity android:name=".parking"></activity>
         <activity android:name=".queuing"></activity>
 

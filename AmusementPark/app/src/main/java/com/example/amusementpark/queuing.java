@@ -15,6 +15,7 @@ public class queuing extends AppCompatActivity {
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private String username;
+    private String sessionID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,9 @@ public class queuing extends AppCompatActivity {
         // receive parameter from previous page
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
+        sessionID = getIntent.getStringExtra("sessionID");
         System.out.println("username from previous page = "+username);
+        System.out.println("session ID from previou page = "+sessionID);
 
         //listener for textview account
         tv_account.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +41,7 @@ public class queuing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(queuing.this, account.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -48,6 +52,7 @@ public class queuing extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(queuing.this, functions.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -59,6 +64,7 @@ public class queuing extends AppCompatActivity {
                 //Start the qr scan activity
                 Intent intent = new Intent(queuing.this, QrCodeActivity.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivityForResult( intent,REQUEST_CODE_QR_SCAN);
             }
         });

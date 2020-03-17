@@ -25,6 +25,7 @@ public class functions extends AppCompatActivity {
     private Button bt_queuing;
     private Button bt_parking;
     private String username;
+    private String sessionID;
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private final String LOGTAG = "QRCScanner-MainActivity";
@@ -45,6 +46,8 @@ public class functions extends AppCompatActivity {
         // receive parameter from previous page
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
+        sessionID=getIntent.getStringExtra("sessionID");
+        System.out.println("session ID from previous page = "+ sessionID);
         System.out.println("username from previous page = " + username);
 
         //listener for textview scan QR code
@@ -54,6 +57,7 @@ public class functions extends AppCompatActivity {
                 //Start the qr scan activity
                 Intent intent = new Intent(functions.this, QrCodeActivity.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
             }
         });
@@ -65,6 +69,7 @@ public class functions extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(functions.this, account.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -76,6 +81,7 @@ public class functions extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(functions.this, ticket_info.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -85,6 +91,7 @@ public class functions extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(functions.this, queuing.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
 
             }
@@ -96,6 +103,7 @@ public class functions extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(functions.this, parking.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
 
             }

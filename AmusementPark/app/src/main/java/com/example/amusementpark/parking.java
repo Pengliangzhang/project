@@ -1,9 +1,12 @@
 package com.example.amusementpark;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -19,6 +22,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.blikoon.qrcodescanner.QrCodeActivity;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+
 public class parking extends AppCompatActivity {
 
 
@@ -27,9 +40,38 @@ public class parking extends AppCompatActivity {
     private EditText et_plate_number;
     private Button bt_confirm;
     private String username;
+    private String sessionID;
     private String plateNumber;
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
+    private static final int SUCCESS = 1;
+    private static final int FAIL = 0;
+    private boolean PASS = false;
+
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case SUCCESS:
+                    PASS = true;
+                    Intent intent = new Intent(parking.this, parking.class);
+                    toast("confirmed");
+                    intent.putExtra("username", username);
+                    intent.putExtra("sessionID", sessionID);
+                    startActivity(intent);
+                    break;
+                case FAIL:
+                    toast("failure");
+
+                    PASS = false;
+                    break;
+
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +82,17 @@ public class parking extends AppCompatActivity {
         // elements initialization
         tv_account = (TextView) findViewById(R.id.tv_account);
         tv_back = (TextView) findViewById(R.id.tv_back);
+        tv_scan_qr = (TextView) findViewById(R.id.tv_scan_qr);
+
         et_plate_number = (EditText) findViewById(R.id.et_plate_number);
         bt_confirm = (Button) findViewById(R.id.bt_confirm);
-        tv_scan_qr=(TextView) findViewById(R.id.tv_scan_qr);
 
 
         // receive parameter from previous page
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
+        sessionID=getIntent.getStringExtra("sessionID");
+        System.out.println("session ID from previous page = "+ sessionID);
         System.out.println("username from previous page = " + username);
 
         // hide keyboard
@@ -64,6 +109,7 @@ public class parking extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(parking.this, account.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -74,6 +120,7 @@ public class parking extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(parking.this, functions.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -107,7 +154,8 @@ public class parking extends AppCompatActivity {
                 //Start the qr scan activity
                 Intent intent = new Intent(parking.this, QrCodeActivity.class);
                 intent.putExtra("username", username);
-                startActivityForResult( intent,REQUEST_CODE_QR_SCAN);
+                intent.putExtra("sessionID", sessionID);
+                startActivityForResult(intent, REQUEST_CODE_QR_SCAN);
             }
         });
 
@@ -116,25 +164,92 @@ public class parking extends AppCompatActivity {
         bt_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (updatePlateNumber(username, plateNumber)) {
-                    System.out.println("user name = " + username);
-                    System.out.println("plate number = " + plateNumber);
-                    toast("confirm plate number");
-                } else {
-                    et_plate_number.setText("");
-                    toast("failure");
-                }
+                updatePlateNumber(username, plateNumber);
+                System.out.println("user name = " + username);
+                System.out.println("plate number = " + plateNumber);
+                //toast("confirm plate number");
+
+
             }
         });
 
     }
 
-    private boolean updatePlateNumber(String username, String plateNumber) {
-        if (username != null && plateNumber != null) {
-            return true;
-        }
-        return false;
+    private void updatePlateNumber(final String username, final String plateNumber) {
+        int result = 0;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                Message message = handler.obtainMessage();
+                try {
+
+                    myConnection urlbase = new myConnection();
+                    String surl = urlbase.getUrl() + "buyparkingspot";
+                    System.out.println("surl " + surl);
+                    URL url = new URL(surl);
+                    connection = (HttpURLConnection) url.openConnection();
+
+
+                    connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
+                    connection.setDoInput(true);// 设置是否从httpUrlConnection读入，默认情况下是true;
+                    connection.setUseCaches(false);// Post 请求不能使用缓存
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    connection.addRequestProperty("Cookie", sessionID);
+                    connection.connect();
+                    connection.setConnectTimeout(2 * 1000);//set connection timeout
+                    connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+                    String body = "{\"plate\":\"" + plateNumber + "\"}";
+                    System.out.println("body " + body);
+
+                    JSONObject jsonObject = new JSONObject(body);
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+                    writer.write(String.valueOf(jsonObject));
+                    writer.close();
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        //定义 BufferedReader输入流来读取URL的响应
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String re = "";
+                        String line;
+                        while ((line = in.readLine()) != null) {
+                            re += line;
+
+                        }
+                        System.out.println("whole results: "+re);
+                        int res = Integer.parseInt(re.substring(8, 9));
+
+                        System.out.println("result code from server: "+ res);
+                        if (res == 0) {
+                            message.what = FAIL;
+
+                        } else if (res == 1) {
+                            message.what = SUCCESS;
+                        }
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+                handler.sendMessage(message);
+
+            }
+        }).start();
+
+
     }
+
 
     //hide keyboard
     private void hideSoftInput(IBinder token) {

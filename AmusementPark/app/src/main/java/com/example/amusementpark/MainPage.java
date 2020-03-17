@@ -1,11 +1,15 @@
 package com.example.amusementpark;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,31 +17,43 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.ValueCallback;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import org.apache.http.cookie.Cookie;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
+import java.net.CookieHandler;
+import java.net.CookiePolicy;
+import java.net.CookieStore;
+import java.net.HttpCookie;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainPage extends AppCompatActivity {
-
 
 
     private Button bt_login;
@@ -52,6 +68,11 @@ public class MainPage extends AppCompatActivity {
     private static final int FAIL = 0;
     private boolean PASS = false;
 
+    public CookieManager cookieManager = null;
+    public static String cookies;
+
+    private String sessionID = "";
+
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -62,6 +83,7 @@ public class MainPage extends AppCompatActivity {
                     PASS = true;
                     Intent intent = new Intent(MainPage.this, functions.class);
                     intent.putExtra("username", username);
+                    intent.putExtra("sessionID", sessionID);
                     startActivity(intent);
                     break;
                 case FAIL:
@@ -180,14 +202,17 @@ public class MainPage extends AppCompatActivity {
             public void run() {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
+
+
                 Message message = handler.obtainMessage();
                 try {
 
-                    myConnection urlbase=new myConnection();
-                    String surl= urlbase.getUrl()+"userlogin";
-                    System.out.println("surl "+surl);
+                    myConnection urlbase = new myConnection();
+                    String surl = urlbase.getUrl() + "login";
+                    System.out.println("surl " + surl);
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
+
                     /*connection.setRequestMethod("GET");
                     //设置连接超时时间（毫秒）
                     connection.setConnectTimeout(5000);
@@ -207,25 +232,34 @@ public class MainPage extends AppCompatActivity {
                     show(result.toString());
                     */
 
+                    //add cookie header
+
+
                     connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
                     connection.setDoInput(true);// 设置是否从httpUrlConnection读入，默认情况下是true;
-                    connection.setUseCaches(false);// Post 请求不能使用缓存
+                    connection.setUseCaches(true);// Post 请求不能使用缓存
                     connection.setRequestMethod("POST");
+
                     connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                     connection.connect();
+
                     connection.setConnectTimeout(2 * 1000);//set connection timeout
                     connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+
 
                     String body = "{\"ps\":\"" + password + "\",\"username\":\"" + username + "\"}";
                     System.out.println("body " + body);
 
                     JSONObject jsonObject = new JSONObject(body);
 
+
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(String.valueOf(jsonObject));
                     writer.close();
 
                     int responseCode = connection.getResponseCode();
+
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         //定义 BufferedReader输入流来读取URL的响应
                         BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -244,6 +278,9 @@ public class MainPage extends AppCompatActivity {
                         }
                     }
 
+                    String[] aaa = connection.getHeaderField("Set-Cookie").split(";");
+                    sessionID = aaa[0];
+                    System.out.println("=======session ID: "+sessionID);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -271,9 +308,6 @@ public class MainPage extends AppCompatActivity {
     private void toast(String s) {
         Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
     }
-
-
-
 
 
 

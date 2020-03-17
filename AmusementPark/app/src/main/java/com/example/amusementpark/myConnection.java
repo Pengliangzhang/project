@@ -1,7 +1,7 @@
 package com.example.amusementpark;
 
 public class myConnection {
-    private String url="http://9b053b53.ngrok.io/";
+    private String url="https://f8f2d351.ngrok.io/";
 
     public String getUrl(){
         return this.url;

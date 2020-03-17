@@ -26,6 +26,7 @@ public class account extends AppCompatActivity {
     private EditText et_confirm_password;
     private Button bt_update_info;
     private String username;
+    private String sessionID;
     private String currPassword;
     private String confirmPassword;
 
@@ -54,6 +55,7 @@ public class account extends AppCompatActivity {
         // receive parameter from previous page
         Intent getIntent = getIntent();
         username = getIntent.getStringExtra("username");
+        sessionID = getIntent.getStringExtra("sessionID");
         System.out.println("username from previous page = "+username);
 
         et_username.setText(username);
@@ -64,6 +66,7 @@ public class account extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(account.this, account.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -74,6 +77,7 @@ public class account extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(account.this, functions.class);
                 intent.putExtra("username", username);
+                intent.putExtra("sessionID", sessionID);
                 startActivity(intent);
             }
         });
@@ -157,6 +161,7 @@ public class account extends AppCompatActivity {
                     toast("update successful.");
                     Intent intent = new Intent(account.this, account.class);
                     intent.putExtra("username", username);
+                    intent.putExtra("sessionID", sessionID);
                     startActivity(intent);
                 } else {
                     et_username.setText(username);
