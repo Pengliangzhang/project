@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "C:\\Users\\haoha\\project\\AmusementPark\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/c5ba8e6cda272be85dddb69d814b9fe1/jetified-QRCodeScanner-0.1.2/res/values-w820dp-v13/values-w820dp-v13.xml",
+                    "source": "C:\\Users\\haoha\\.gradle\\caches\\transforms-2\\files-2.1\\6153c99ec169e53e9b68ba7e224eaa59\\jetified-QRCodeScanner-0.1.2\\res\\values-w820dp-v13\\values-w820dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

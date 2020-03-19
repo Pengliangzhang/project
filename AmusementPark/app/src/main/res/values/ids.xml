@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_StationName" type="id" />
+    <item name="tv_StationOne" type="id" />
+    <item name="tv_StationTwo" type="id" />
+    <item name="tv_StationThree" type="id" />
+    <item name="tv_TimeOne" type="id" />
+    <item name="tv_TimeTwo" type="id" />
+    <item name="tv_TimeThree" type="id" />
+    <item name="tv_EstimateWaitingTime" type="id" />
+    <item name="bt_CancelQueueOne" type="id" />
+    <item name="bt_CancelQueueTwo" type="id" />
+    <item name="bt_CancelQueueThree" type="id" />
+</resources>

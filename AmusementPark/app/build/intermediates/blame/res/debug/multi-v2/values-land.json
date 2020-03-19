@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
+            "outputFile": "C:\\Users\\haoha\\project\\AmusementPark\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/res/values-land/values-land.xml",
+                    "source": "C:\\Users\\haoha\\.gradle\\caches\\transforms-2\\files-2.1\\2c5853615872407a0cae8ab7c7c94847\\jetified-card-form-4.2.0\\res\\values-land\\values-land.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,119,192",
+                        "endColumns": "63,72,72",
+                        "endOffsets": "114,187,260"
+                    },
+                    "to": {
+                        "startLines": "5,6,7",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "264,328,401",
+                        "endColumns": "63,72,72",
+                        "endOffsets": "323,396,469"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\haoha\\.gradle\\caches\\transforms-2\\files-2.1\\2946ca0ea6c89dab7d7d9fbc18e54292\\material-1.0.0\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,24 +40,7 @@
                     }
                 },
                 {
-                    "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/values-land/values-land.xml",
-                    "from": {
-                        "startLines": "2,3,4",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "55,119,192",
-                        "endColumns": "63,72,72",
-                        "endOffsets": "114,187,260"
-                    },
-                    "to": {
-                        "startLines": "5,6,7",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "264,328,401",
-                        "endColumns": "63,72,72",
-                        "endOffsets": "323,396,469"
-                    }
-                },
-                {
-                    "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/values-land/values-land.xml",
+                    "source": "C:\\Users\\haoha\\.gradle\\caches\\transforms-2\\files-2.1\\906744c4ddcbc384c5a8d2d69414f8fa\\appcompat-1.0.2\\res\\values-land\\values-land.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
