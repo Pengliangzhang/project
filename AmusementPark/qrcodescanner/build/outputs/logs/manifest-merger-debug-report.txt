@@ -1,0 +1,49 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+	package
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:3:5-40
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:1-13:12
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:5-11:19
+	android:supportsRtl
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:6:9-35
+	android:label
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:45-77
+	android:allowBackup
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:18-44
+activity#com.blikoon.qrcodescanner.QrCodeActivity
+ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:7:9-9:20
+	android:name
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:7:19-49
+uses-sdk
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		ADDED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+		INJECTED from /Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml

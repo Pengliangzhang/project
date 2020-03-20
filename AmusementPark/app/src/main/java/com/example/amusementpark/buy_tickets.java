@@ -19,8 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-
 
 public class buy_tickets extends AppCompatActivity {
 
@@ -29,12 +27,9 @@ public class buy_tickets extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mydateSetListener;
     private Spinner ticketTypeSpinner, ticketNumSpinner;
     private String date, type, price,number;
-    private int t;
-    private Button addtocart_btn;
-    private ImageView cartimage;
-    //private Ticket ticket = new Ticket(type,date,price);
     private Intent intent = new Intent();
     private ArrayList<Ticket> mylist = new ArrayList<>();
+    private int test1=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +58,15 @@ public class buy_tickets extends AppCompatActivity {
             }
         });
 
+
         mydateSetListener = new DatePickerDialog.OnDateSetListener() {
+
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month=month+1;
                 //Log.d(TAG,"date:"+year+"/"+month+"/"+dayOfMonth);
                  date = month+"/"+dayOfMonth+"/"+year;
+                 test1=1; //Check if the date is set: 1- set; 0- Not set
                 mydisplayDate.setText(date);
             }
         };
@@ -85,6 +83,7 @@ public class buy_tickets extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.ticketTypes));
         ticketTypeSpinner.setAdapter(ticketTpyeAdapter);
+
 
         //Set ticket numbers adapter
         ArrayAdapter<String> ticketNumAdapter = new ArrayAdapter<String>(
@@ -109,61 +108,48 @@ public class buy_tickets extends AppCompatActivity {
 
 
 
-
-
         /* Add to Cart Button Function*/
         //Initialization
-        addtocart_btn = (Button) findViewById(R.id.addToCart);
-        cartimage = (ImageView) findViewById(R.id.cartimage);
+        Button addtocart_btn = (Button) findViewById(R.id.addToCart);
+        ImageView cartimage = (ImageView) findViewById(R.id.cartimage);
 
         //Add_to_Cart Button
         addtocart_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                type = ticketTypeSpinner.getSelectedItem().toString();
+                //Determine the valid selection
+                if(test1==1){ //Date is set
+                    type = ticketTypeSpinner.getSelectedItem().toString();
 
+                    if(type.equals("Child(Age3~12) $10")){
+                        price = "$10";
+                    }else if(type.equals("Adult $20")){
+                        price = "$20";
 
-                if(type.equals("Child(Age3~12) $10")){
-                    price = "$10";
-                }else if(type.equals("Adult $20")){
-                    price = "$20";
+                    }else if(type.equals("Senior(Age65+) $10")){
+                        price = "$10";
 
-                }else if(type.equals("Senior(Age65+) $10")){
-                    price = "$10";
+                    }else if(type.equals("Student $15")){ //Student $15
+                        price = "$15";
 
-                }else if(type.equals("Student $15")){ //Student $15
-                    price = "$15";
+                    }else{
+                        System.out.println("Error");
+                    }
 
-                }else{
-                    System.out.println("Error");
+                    System.out.println("type: "+type);
+                    System.out.println("price: "+price);
+                    System.out.println("date: "+date);
+                    Ticket ticket = new Ticket(type,date,price,number);
+
+                    mylist.add(ticket);
+                    //Make a toast
+                    Toast.makeText(getApplicationContext(),"Add to cart",Toast.LENGTH_SHORT).show();
+
+                }else{ //Date not set
+                    //Toast
+                    Toast.makeText(getApplicationContext(),"Error: Please Select the Date",Toast.LENGTH_SHORT).show();
                 }
-
-
-
-                System.out.println("type: "+type);
-                System.out.println("price: "+price);
-                System.out.println("date: "+date);
-                Ticket ticket = new Ticket(type,date,price,number);
-                //intent.putExtra("Ticket", ticket);
-
-                /*
-                if(mylist!=null){
-                    mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
-                    System.out.println("mylist size: "+mylist.size());
-                    System.out.println("---------------------------------");
-                }
-
-                 */
-
-                mylist.add(ticket);
-                System.out.println("mylist size: "+mylist.size());
-
-
-
-
-                //Make a toast
-                Toast.makeText(getApplicationContext(),"Add to cart",Toast.LENGTH_SHORT).show();
             }
         });
 
