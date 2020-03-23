@@ -5,9 +5,17 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path");
+const cors = require('cors');
 var responseClient = require('./Public/util').responseClient;
 
 const PORT = process.env.PORT || 3005;
+// setup cros
+var corsOptions = {
+    origin: ['http://localhost:2999'],
+    credentials: true,
+    maxAge: '900000'
+  }
+app.use(cors(corsOptions))
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
@@ -31,11 +39,12 @@ var FOB = require("./Database/fob.js");
 
 // set up router
 app.get('/', (req, res) =>{
-    res.send("Hello admin db system");
+    responseClient(res, 200, 0, `Thanks for using EMPLOYEE DB`);
 });
 
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
+    console.log(body)
     if(!body.username){
         return responseClient(res, 200, 0, "user name cannot be none!");
     }
@@ -71,6 +80,7 @@ app.get('/logout', (req, res)=>{
 
 app.post('/adminsignup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
+    console.log(body)
     if(body.ps === undefined || body.username === undefined){
         return responseClient(res, 200, 0, "Please enter required information");
     }
@@ -84,6 +94,7 @@ app.post('/adminsignup', (req, res) =>{
 
 app.post('/activatefob', (req, res) =>{
     var body = _.pick(req.body,["fobid", "ticketID"]);
+    console.log(body)
     if(body.fobid === undefined || body.ticketID === undefined || body.fobid ==''){
         return responseClient(res, 200, 0, "Please enter required information");
     }
@@ -97,6 +108,7 @@ app.post('/activatefob', (req, res) =>{
 
 app.post('/deletefob', (req, res) =>{
     var body = _.pick(req.body,["fobid"]);
+    console.log(body)
     if(body.fobid === undefined){
         return responseClient(res, 200, 0, "Please enter required information");
     }
@@ -111,6 +123,7 @@ app.post('/deletefob', (req, res) =>{
 
 app.post('/verifytickets', (req, res) =>{
     var body = _.pick(req.body,["id"]);
+    console.log(body)
     if(body.id === undefined || body.id === ''){
         return responseClient(res, 200, 0, `A id is required to provide !`);
     }
@@ -127,7 +140,6 @@ app.post('/verifytickets', (req, res) =>{
 
 
 app.get('/queryalltickets', (req, res) =>{
-
     var response = TICKET.queryAll();
     responseClient(res, 200, 1, response);
 });
