@@ -65,7 +65,7 @@ public class buy_tickets extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month=month+1;
                 //Log.d(TAG,"date:"+year+"/"+month+"/"+dayOfMonth);
-                 date = month+"/"+dayOfMonth+"/"+year;
+                 date = dayOfMonth+"/"+month +"/"+year;
                  test1=1; //Check if the date is set: 1- set; 0- Not set
                 mydisplayDate.setText(date);
             }

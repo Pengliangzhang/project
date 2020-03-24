@@ -17,18 +17,24 @@ import com.baoyachi.stepview.bean.StepBean;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.json.JSONObject;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 
 @SuppressWarnings("unchecked")
 public class paymentDone extends AppCompatActivity {
-    private String value, type, expire, email;
+    private String date,email;
+    private  int value, type;
+    private Date expire;
     private ArrayList<Ticket> mylist = new ArrayList<>();
 
     @Override
@@ -83,9 +89,38 @@ public class paymentDone extends AppCompatActivity {
             Send Ticket info. to database when the payment is done
          */
         for(int i=0; i < mylist.size();i++){
-            value = mylist.get(i).getPrice();
-            type = mylist.get(i).getType();
-            expire = mylist.get(i).getDate();
+            String str_value = mylist.get(i).getPrice();
+            String str_type = mylist.get(i).getType();
+            value = Integer.parseInt(str_value.substring(1));
+
+            switch (str_type.substring(0,2)){
+                case "Ch":
+                    type = 1;
+                    break;
+
+                case "Ad":
+                    type = 2;
+                    break;
+
+                case "Se":
+                    type = 3;
+                    break;
+
+                case "St":
+                    type = 4;
+                    break;
+
+                default:
+                    System.out.println("no match");
+            }
+
+
+            date = mylist.get(i).getDate();
+            try {
+                expire = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             email = "12345@icloud.com"; //temporary email for testing
 
             System.out.println("++++++++++++++++++++++++:   "+value+" "+type+" "+expire+"  "+email);
@@ -99,7 +134,7 @@ public class paymentDone extends AppCompatActivity {
 
 
     /* Send ticket info. to database */
-    private void SendTicketInfo(final String value, final String type, final String expire, final String email){
+    private void SendTicketInfo(final int value, final int type, final Date expire, final String email){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -110,7 +145,8 @@ public class paymentDone extends AppCompatActivity {
 
                 try{
 
-                    String str_url = "http://0d3d2083.ngrok.io/" + "buytickets";
+                    //String str_url = "http://0d3d2083.ngrok.io/" + "buytickets";
+                    String str_url = "http://35.230.92.53/" ;
                     System.out.println("str_url " + str_url);
                     URL url = new URL(str_url);
                     connection = (HttpURLConnection) url.openConnection(); // 打开和URL之间的连接
@@ -150,7 +186,7 @@ public class paymentDone extends AppCompatActivity {
                             result += line;
 
                         }
-                        System.out.println("whole results: " + result);
+                        System.out.println("whole results++++++++++++++++++++++++++++++++++++++: " + result);
                         //int res = Integer.parseInt(result.substring(8, 9));
                         //int res = Integer.parseInt(result);
 
@@ -173,14 +209,8 @@ public class paymentDone extends AppCompatActivity {
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally { // 使用finally块来关闭输入流
-                    try{
-
-                        if(in!=null){
-                            in.close();
-                        }
-
-                    }catch (IOException ex){
-                        ex.printStackTrace();
+                    if(connection!=null){
+                        connection.disconnect();
                     }
                 }
                 handler.sendMessage(message);
