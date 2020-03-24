@@ -18,7 +18,7 @@
     <string name="TimeOne"></string>
     <string name="TimeTwo"></string>
     <string name="TimeThree"></string>
-    <string name="JoinQueue">Join Queueing</string>
+    <string name="AddQueue">Join Queueing</string>
 
 
     <string name="scanqr">Scan QR Code</string>

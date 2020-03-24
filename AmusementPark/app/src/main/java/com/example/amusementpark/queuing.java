@@ -1,11 +1,12 @@
 package com.example.amusementpark;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.blikoon.qrcodescanner.QrCodeActivity;
 import org.json.JSONObject;
@@ -26,6 +27,7 @@ public class queuing extends AppCompatActivity {
     private Button bt_CancelQueueOne;
     private Button bt_CancelQueueTwo;
     private Button bt_CancelQueueThree;
+    private Button bt_AddQueue;
     private TextView tv_StationOne;
     private TextView tv_StationTwo;
     private TextView tv_StationThree;
@@ -37,6 +39,7 @@ public class queuing extends AppCompatActivity {
     private String username;
     private String station = null;
     private String message;
+    private String id= null;
     @Override
 
 
@@ -60,6 +63,7 @@ public class queuing extends AppCompatActivity {
         bt_CancelQueueOne = (Button) findViewById(R.id.bt_CancelQueueOne);
         bt_CancelQueueTwo = (Button) findViewById(R.id.bt_CancelQueueTwo);
         bt_CancelQueueThree = (Button) findViewById(R.id.bt_CancelQueueThree);
+        bt_AddQueue = (Button) findViewById(R.id.bt_AddQueue);
 
 
         // receive parameter from previous page
@@ -108,7 +112,7 @@ public class queuing extends AppCompatActivity {
                                                          tv_StationTwo.setText(tv_StationThree.getText().toString());
                                                          tv_TimeTwo.setText(tv_TimeThree.getText().toString());
                                                      }
-                                                     SynCancelQueue(tv_StationOne.getText().toString());
+                                                     SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
                                                  }
                                              }
         );
@@ -122,7 +126,7 @@ public class queuing extends AppCompatActivity {
                     tv_StationTwo.setText(tv_StationThree.getText().toString());
                     tv_TimeTwo.setText(tv_TimeThree.getText().toString());
                 }
-                SynCancelQueue(tv_StationTwo.getText().toString());
+                SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
             }
         });
 
@@ -133,7 +137,17 @@ public class queuing extends AppCompatActivity {
             {
                 tv_StationThree.setText("");
                 tv_TimeThree.setText("");
-                SynCancelQueue(tv_StationThree.getText().toString());
+                SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
+            }
+        });
+
+        // button for Add queue
+        bt_AddQueue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                AddStation("rollercoaster","");
+                SynAddQueue("59v7e54ook3cnxprabcdefgh","rollercoaster");
             }
         });
 
@@ -162,9 +176,9 @@ public class queuing extends AppCompatActivity {
     }
 
 
-
-    private void SynCancelQueue(String Station) { //HTTP POST request
+    private void SynCancelQueue(String UserID, String Station) { //HTTP POST request
         int result = 0;
+        id = UserID;
         station = Station;
         new Thread(new Runnable() {
             @Override
@@ -172,30 +186,10 @@ public class queuing extends AppCompatActivity {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-
                     myConnection urlbase=new myConnection();
                     String surl= urlbase.getUrl()+"userlogin";
-                    System.out.println("surl "+surl);
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
-                    /*connection.setRequestMethod("GET");
-                    //设置连接超时时间（毫秒）
-                    connection.setConnectTimeout(5000);
-                    //设置读取超时时间（毫秒）
-                    connection.setReadTimeout(5000);
-                    //返回输入流
-                    InputStream in = connection.getInputStream();
-
-                    //读取输入流
-                    reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuilder result = new StringBuilder();
-                    String line;
-
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
-                    }
-                    show(result.toString());
-                    */
 
                     connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
                     connection.setDoInput(true);// 设置是否从httpUrlConnection读入，默认情况下是true;
@@ -206,7 +200,8 @@ public class queuing extends AppCompatActivity {
                     connection.setConnectTimeout(2 * 1000);//set connection timeout
                     connection.setReadTimeout(2 * 1000);//set reading data timeout
 
-                    String body = "{\"Station\":\"" + station + "\",\"username\":\"" + username + "\"}";
+
+                    String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
                     System.out.println("body " + body);
 
                     JSONObject jsonObject = new JSONObject(body);
@@ -226,6 +221,13 @@ public class queuing extends AppCompatActivity {
 
                         }
                         int res = Integer.parseInt(re.substring(8, 9));
+                        if (res == 1) {
+                            toast("Cancel queue successfully");
+
+                        } else
+                        {
+                            toast("Error occured");
+                        }
                     }
 
 
@@ -242,9 +244,79 @@ public class queuing extends AppCompatActivity {
     }
 
 
-    private String SynWaitingTime(String Station) {//HTTP GET Request
+    private void SynAddQueue(String UserId, String Station) { //HTTP POST request
         int result = 0;
         station = Station;
+        id = UserId;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HttpURLConnection connection = null;
+                BufferedReader reader = null;
+                try {
+                    myConnection urlbase=new myConnection();
+                    String surl= urlbase.getUrl()+"userlogin";
+                    URL url = new URL(surl);
+                    connection = (HttpURLConnection) url.openConnection();
+
+                    connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
+                    connection.setDoInput(true);// 设置是否从httpUrlConnection读入，默认情况下是true;
+                    connection.setUseCaches(false);// Post 请求不能使用缓存
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    connection.connect();
+                    connection.setConnectTimeout(2 * 1000);//set connection timeout
+                    connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+                    String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
+                    JSONObject jsonObject = new JSONObject(body);
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+                    writer.write(String.valueOf(jsonObject));
+                    writer.close();
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        //定义 BufferedReader输入流来读取URL的响应
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String re = "";
+                        String line;
+                        while ((line = in.readLine()) != null) {
+                            re += line;
+
+                        }
+                        int res = Integer.parseInt(re.substring(8, 9));
+                        if (res == 1) {
+                            toast("Join queue successfully");
+
+                        } else if(res==0)
+                        {
+                            toast("You have already joined this queue");
+                        }
+                        else
+                        {
+                            toast("Error occured");
+                        }
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+
+    private String SynWaitingTime(String UserID,String Station) {//HTTP GET Request
+        int result = 0;
+        station = Station;
+        id= UserID;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -266,6 +338,15 @@ public class queuing extends AppCompatActivity {
                     connection.connect();
                     connection.setConnectTimeout(2 * 1000);//set connection timeout
                     connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+                    String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
+                    System.out.println("body " + body);
+
+                    JSONObject jsonObject = new JSONObject(body);
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+                    writer.write(String.valueOf(jsonObject));
+                    writer.close();
 
                     InputStream inputStream = connection.getInputStream();
                     //读取输入流
@@ -294,18 +375,30 @@ public class queuing extends AppCompatActivity {
         return message;
     }
 
+
+    private void toast(String s) {
+        Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
+
+
+
+
     public void main(String[] args)
     {
         while(true) {
             if (!tv_StationOne.getText().toString().equals(""))
             {
-               SynWaitingTime(tv_StationOne.getText().toString());
+               SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
             }
             if(!tv_StationTwo.getText().toString().equals("")) {
-                SynWaitingTime(tv_StationTwo.getText().toString());
+                SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
             }
             if(!tv_StationThree.getText().toString().equals("")) {
-                SynWaitingTime(tv_StationThree.getText().toString());
+                SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
             }
             System.out.println(tv_StationOne.getText().toString()+","+tv_StationTwo.getText().toString()+","+tv_StationThree.getText().toString());
         }

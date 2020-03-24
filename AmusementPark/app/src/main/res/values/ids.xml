@@ -11,4 +11,5 @@
     <item name="bt_CancelQueueOne" type="id" />
     <item name="bt_CancelQueueTwo" type="id" />
     <item name="bt_CancelQueueThree" type="id" />
+    <item name="bt_AddQueue" type="id" />
 </resources>
