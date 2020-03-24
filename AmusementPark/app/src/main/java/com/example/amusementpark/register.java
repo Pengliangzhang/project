@@ -151,7 +151,7 @@ public class register extends AppCompatActivity {
                 try {
 
                     myConnection urlbase = new myConnection();
-                    String surl = urlbase.getUrl() + "usersignup";
+                    String surl = urlbase.getUrl() + "signup";
                     System.out.println("surl " + surl);
                     URL url = new URL(surl);
 
