@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
+
 public class queuing extends AppCompatActivity {
     private TextView tv_account;
     private TextView tv_back;
@@ -161,7 +162,8 @@ public class queuing extends AppCompatActivity {
             {
                 AddStation("rollercoaster"+ i,"1");
                 i=i+1;
-                //SynAddQueue("59v7e54ook3cnxprabcdefgh","rollercoaster");
+                SynAddQueue("59v7e54ook3cnxprabcdefgh","rollercoaster");
+
             }
         });
 
@@ -201,7 +203,7 @@ public class queuing extends AppCompatActivity {
                 BufferedReader reader = null;
                 try {
                     QueueConnection urlbase= new QueueConnection();
-                    String surl= urlbase.getUrl()+"login";
+                    String surl= urlbase.getUrl()+"dequeueFROMwait";
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
 
@@ -269,8 +271,9 @@ public class queuing extends AppCompatActivity {
                 BufferedReader reader = null;
                 try {
                     QueueConnection urlbase= new QueueConnection();
-                    String surl= urlbase.getUrl()+"login";
+                    String surl= urlbase.getUrl()+"enqueue";
                     URL url = new URL(surl);
+
                     connection = (HttpURLConnection) url.openConnection();
 
                     connection.setDoOutput(true);// 设置是否向httpUrlConnection输出，因为这个是post请求，参数要放在; http正文内，因此需要设为true, 默认情况下是false;
@@ -281,6 +284,9 @@ public class queuing extends AppCompatActivity {
                     connection.connect();
                     connection.setConnectTimeout(2 * 1000);//set connection timeout
                     connection.setReadTimeout(2 * 1000);//set reading data timeout
+
+
+
 
                     String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
                     System.out.println(body);
@@ -333,7 +339,7 @@ public class queuing extends AppCompatActivity {
                 BufferedReader reader = null;
                 try {
                     QueueConnection urlbase = new QueueConnection();
-                    String surl = urlbase.getUrl() + "login";
+                    String surl = urlbase.getUrl() + "updateposition";
                     System.out.println("surl " + surl);
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
@@ -392,7 +398,7 @@ public class queuing extends AppCompatActivity {
 
 
 
-    public static void main(String args[])
+    public static void main()
     {
         while(true) {
             if (!tv_StationOne.getText().toString().equals(""))
