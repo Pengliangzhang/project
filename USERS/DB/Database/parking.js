@@ -38,6 +38,26 @@ var buyParkingSPOT = function(body) {
     return {result, response};
   }
 
+  var queryParkingSPOT = function(username) {
+      var result, response;
+      var sqlQueryAllParking = `SELECT * FROM PARKING where username = '${username}' `;
+
+      connection.query(sqlQueryAllParking, (err, results, fields)=>{
+        if(err){
+          console.log(err.message);   
+          result = 0;   
+        }
+        result = 1;
+        response = results;
+      });
+
+    while(result==undefined || response==undefined) {
+      require('deasync').runLoopOnce();
+    }
+    return {result, response};
+  }
+
   module.exports = {
-    buyParking: buyParkingSPOT
+    buyParking: buyParkingSPOT,
+    queryParkingSPOT: queryParkingSPOT
   }

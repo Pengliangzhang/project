@@ -15,11 +15,12 @@ const PORT = process.env.PORT || 3001;
 
 // setup cros
 var corsOptions = {
-  origin: 'http://localhost:3000, 64.229.69.105, 174.114.56.71',
+  origin: 'http://localhost:3000',
   credentials: true,
   maxAge: '900000'
 }
 app.use(cors(corsOptions))
+// app.options('*', cors(corsOptions));
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
@@ -167,6 +168,22 @@ app.post('/buyparkingspot', (req, res) =>{
     var response = PARKING.buyParking(body);
     if(response.result==1){
         responseClient(res, 200, response.result, "Your booked a parking spot !");
+    }else{
+        responseClient(res, 200, response.result, `Unable to process the request !`);
+    }
+});
+
+app.get('/queryparkingspot', (req, res) =>{
+    var username;
+    if(req.session.user){
+        username = req.session.user.username;
+    }else {
+        return responseClient(res, 200, 0, "please login first !");
+    }
+    var response = PARKING.queryParkingSPOT(username);
+
+    if(response.result==1){
+        responseClient(res, 200, response.result, response.response);
     }else{
         responseClient(res, 200, response.result, `Unable to process the request !`);
     }

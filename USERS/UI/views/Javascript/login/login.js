@@ -1,9 +1,5 @@
 $(document).ready(function(){
-    // console.log("Logging ")
-    
-    
-
-    
+    // console.log("Logging ")    
 })
 
 function getUserInfoListener() {
@@ -19,11 +15,11 @@ function checkExistUser(){
         url: requestURL + '/login',
         method:"POST",
         data:$('#user_login_form').serialize(),
-        xhrFields: {
-            withCredentials: true
+        xhrFields:{
+            withCredentials:true
         },
         crossDomain: true,
-        success: function(data) {
+        success: function(data) {       
             if(data.code == 1){
                 window.location.replace("/admin");
             }

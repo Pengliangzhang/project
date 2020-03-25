@@ -15,7 +15,7 @@ var corsOptions = {
     credentials: true,
     maxAge: '900000'
   }
-app.use(cors(corsOptions))
+app.use(cors())
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
