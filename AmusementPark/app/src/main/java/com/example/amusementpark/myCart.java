@@ -28,8 +28,6 @@ import java.util.List;
 public class myCart extends AppCompatActivity {
 
     private ArrayList<Ticket> mylist = new ArrayList<>();
-    private ArrayList<Ticket> myupdatelist = new ArrayList<>();
-    Boolean isUpdate = false;
 
 
     @Override
@@ -68,11 +66,8 @@ public class myCart extends AppCompatActivity {
         myListView.setAdapter(adapter);
 
         //Receive parameter from previous page
-        Intent getIntent = new Intent();
+        //Intent getIntent = new Intent();
         mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
-        myupdatelist = (ArrayList<Ticket>) getIntent().getSerializableExtra("myupdatelist");
-
-
 
         /* Next Step Button Function*/
         //Initialize Button
@@ -84,14 +79,7 @@ public class myCart extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(myCart.this,payment.class);
-
-                //check if the list is updated
-                if(isUpdate){
-                    intent.putExtra("myupdatelist", mylist);
-                }else{
-                    intent.putExtra("mylist", mylist);
-                }
-
+                intent.putExtra("mylist", mylist);
                 startActivity(intent);
             }
         });
@@ -173,7 +161,8 @@ public class myCart extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mylist.remove(position);
-                    isUpdate = refresh();
+                    refresh();
+
                 }
             });
             return convertView;
@@ -187,13 +176,13 @@ public class myCart extends AppCompatActivity {
     /*
        refresh page
       */
-    private Boolean refresh() {
+    private void refresh() {
         finish();
         Intent intent1 = new Intent(this, myCart.class);
-        intent1.putExtra("myupdatelist", mylist);
+        intent1.putExtra("mylist", mylist);
         System.out.println("my list size now: "+mylist.size());
         startActivity(intent1);
-        return true;
+
 
     }
 

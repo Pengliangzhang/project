@@ -26,7 +26,7 @@ public class payment extends AppCompatActivity {
         setContentView(R.layout.payment);
 
         /* Receive parameter from previous page */
-        Intent getIntent = new Intent();
+        //Intent getIntent = new Intent();
         mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
 
         /* Import Step Progress Bar*/

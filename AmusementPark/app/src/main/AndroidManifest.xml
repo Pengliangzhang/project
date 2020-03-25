@@ -28,6 +28,7 @@
         <activity android:name=".myCart"></activity>
         <activity android:name=".payment"></activity>
         <activity android:name=".paymentDone"></activity>
+        <activity android:name=".order_history"></activity>
 
 
     </application>

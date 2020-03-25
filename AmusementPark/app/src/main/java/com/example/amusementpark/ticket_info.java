@@ -15,29 +15,54 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import androidx.annotation.Nullable;
 
 @SuppressWarnings("unchecked")
 public class ticket_info extends AppCompatActivity {
 
     private ArrayList<Ticket> mylist = new ArrayList<>();
+    private ArrayList<Ticket> pre_list = new ArrayList<>(); //previous list
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ticket_info);
 
 
+
         /* Receive parameter from previous page */
-        Intent getIntent = new Intent();
-        mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
+        //Intent getIntent = new Intent();
+        //mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
+        pre_list = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
+        //System.out.println("++++++++++++++++++++++++:" + mylist.size());
+
+
+        if(pre_list != null){
+            for(int i = 0; i< pre_list.size(); i++){
+                mylist.add(pre_list.get(i));
+            }
+        }
+
+
+
 
         /* Add List view in myCart*/
         ListView myListView = (ListView) findViewById(R.id.ticketInfo);
         ticketAdapter adapter = new ticketAdapter();
         myListView.setAdapter(adapter);
 
-
-
+        /* Booking history button */
+        Button history_bt = (Button) findViewById(R.id.ticketHistory) ;
+        //Switch to the next page
+        history_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent();
+                intent.setClass(ticket_info.this,order_history.class);
+                startActivity(intent);
+            }
+        });
 
         /* Buy Ticket Button Function*/
         Button buyticket_bt = (Button) findViewById(R.id.buyTicket);

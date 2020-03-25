@@ -46,7 +46,7 @@ public class paymentDone extends AppCompatActivity {
 
 
         /* Receive parameter from previous page */
-        Intent getIntent = new Intent();
+        //Intent getIntent = new Intent();
         mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
 
 
@@ -73,7 +73,7 @@ public class paymentDone extends AppCompatActivity {
                 .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(paymentDone.this, R.drawable.attention));//设置StepsViewIndicator AttentionIcon
 
         /*See My Tickets TextView Function*/
-        TextView myticket = (TextView) findViewById(R.id.textView);
+        TextView myticket = (TextView) findViewById(R.id.see_info);
 
         //Switch to ticket_info page
         myticket.setOnClickListener(new View.OnClickListener() {
@@ -89,51 +89,57 @@ public class paymentDone extends AppCompatActivity {
 
         /*
             Send Ticket info. to database when the payment is done
-         */
-        for(int i=0; i < mylist.size();i++){
-            String str_value = mylist.get(i).getPrice();
-            String str_type = mylist.get(i).getType();
-            value = Integer.parseInt(str_value.substring(1));
+        */
+        if(mylist!=null){
+            for(int i=0; i < mylist.size();i++){
+                String str_value = mylist.get(i).getPrice();
+                String str_type = mylist.get(i).getType();
+                value = Integer.parseInt(str_value.substring(1));
 
-            switch (str_type.substring(0,2)){
-                case "Ch":
-                    type = 1;
-                    break;
+                switch (str_type.substring(0,2)){
+                    case "Ch":
+                        type = 1;
+                        break;
 
-                case "Ad":
-                    type = 2;
-                    break;
+                    case "Ad":
+                        type = 2;
+                        break;
 
-                case "Se":
-                    type = 3;
-                    break;
+                    case "Se":
+                        type = 3;
+                        break;
 
-                case "St":
-                    type = 4;
-                    break;
+                    case "St":
+                        type = 4;
+                        break;
 
-                default:
-                    System.out.println("no match");
+                    default:
+                        System.out.println("no match");
+                }
+
+
+                date = mylist.get(i).getDate();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    expireD = dateFormat.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+                String strD =dateFormat.format(expireD);
+                email = "12345@icloud.com"; //temporary email for testing
+
+                //System.out.println("++++++++++++++++++++++++:   "+value+" "+type+" "+expire+"  "+email);
+
+                //Send the info.
+                SendTicketInfo(value,type,strD,email);
             }
 
-
-            date = mylist.get(i).getDate();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                expireD = dateFormat.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-
-            String strD =dateFormat.format(expireD);
-            email = "12345@icloud.com"; //temporary email for testing
-
-            //System.out.println("++++++++++++++++++++++++:   "+value+" "+type+" "+expire+"  "+email);
-
-            //Send the info.
-            SendTicketInfo(value,type,strD,email);
         }
+        //*/
+
+
 
     }
 
