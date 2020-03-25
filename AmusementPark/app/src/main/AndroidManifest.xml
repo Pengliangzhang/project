@@ -23,12 +23,20 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".queuing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".register"></activity>
         <activity android:name=".functions"></activity>
         <activity android:name=".forgetPassword"></activity>
         <activity android:name=".account"></activity>
         <activity android:name=".parking"></activity>
-        <activity android:name=".queuing"></activity>
+
 
 
         <activity android:name=".buy_tickets"></activity>

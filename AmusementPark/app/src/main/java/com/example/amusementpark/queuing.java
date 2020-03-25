@@ -28,18 +28,19 @@ public class queuing extends AppCompatActivity {
     private Button bt_CancelQueueTwo;
     private Button bt_CancelQueueThree;
     private Button bt_AddQueue;
-    private TextView tv_StationOne;
-    private TextView tv_StationTwo;
-    private TextView tv_StationThree;
-    private TextView tv_TimeOne;
-    private TextView tv_TimeTwo;
-    private TextView tv_TimeThree;
+    private static TextView tv_StationOne;
+    private static TextView tv_StationTwo;
+    private static TextView tv_StationThree;
+    private static TextView tv_TimeOne;
+    private static TextView tv_TimeTwo;
+    private static TextView tv_TimeThree;
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private String username;
-    private String station = null;
-    private String message;
-    private String id= null;
+    private static String station = null;
+    private static String message;
+    private static String id= null;
+    private int i;
     @Override
 
 
@@ -111,6 +112,12 @@ public class queuing extends AppCompatActivity {
                                                          tv_TimeOne.setText(tv_TimeTwo.getText().toString());
                                                          tv_StationTwo.setText(tv_StationThree.getText().toString());
                                                          tv_TimeTwo.setText(tv_TimeThree.getText().toString());
+                                                         tv_StationThree.setText("");
+                                                         tv_TimeThree.setText("");
+                                                     }
+                                                     else {
+                                                         tv_StationOne.setText("");
+                                                         tv_TimeOne.setText("");
                                                      }
                                                      SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
                                                  }
@@ -125,6 +132,12 @@ public class queuing extends AppCompatActivity {
                 if (!tv_StationThree.getText().toString().equals("")) {
                     tv_StationTwo.setText(tv_StationThree.getText().toString());
                     tv_TimeTwo.setText(tv_TimeThree.getText().toString());
+                    tv_StationThree.setText("");
+                    tv_TimeThree.setText("");
+                }
+                else {
+                    tv_StationTwo.setText("");
+                    tv_TimeTwo.setText("");
                 }
                 SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
             }
@@ -146,8 +159,9 @@ public class queuing extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                AddStation("rollercoaster","");
-                SynAddQueue("59v7e54ook3cnxprabcdefgh","rollercoaster");
+                AddStation("rollercoaster"+ i,"1");
+                i=i+1;
+                //SynAddQueue("59v7e54ook3cnxprabcdefgh","rollercoaster");
             }
         });
 
@@ -171,7 +185,7 @@ public class queuing extends AppCompatActivity {
             tv_TimeThree.setText(tv_EstimateWaitingTime);
         }
         else{
-            System.out.print("You have reached limit three times at the moment");
+            toast("You have reached limit three times at the moment");
         }
     }
 
@@ -186,8 +200,8 @@ public class queuing extends AppCompatActivity {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    myConnection urlbase=new myConnection();
-                    String surl= urlbase.getUrl()+"userlogin";
+                    QueueConnection urlbase= new QueueConnection();
+                    String surl= urlbase.getUrl()+"login";
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
 
@@ -202,7 +216,7 @@ public class queuing extends AppCompatActivity {
 
 
                     String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
-                    System.out.println("body " + body);
+                    System.out.println(body);
 
                     JSONObject jsonObject = new JSONObject(body);
 
@@ -254,8 +268,8 @@ public class queuing extends AppCompatActivity {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    myConnection urlbase=new myConnection();
-                    String surl= urlbase.getUrl()+"userlogin";
+                    QueueConnection urlbase= new QueueConnection();
+                    String surl= urlbase.getUrl()+"login";
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
 
@@ -269,6 +283,7 @@ public class queuing extends AppCompatActivity {
                     connection.setReadTimeout(2 * 1000);//set reading data timeout
 
                     String body = "{\"id\":\"" + id + "\",\"facility\":\"" + station + "\"}";
+                    System.out.println(body);
                     JSONObject jsonObject = new JSONObject(body);
 
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
@@ -288,18 +303,13 @@ public class queuing extends AppCompatActivity {
                         int res = Integer.parseInt(re.substring(8, 9));
                         if (res == 1) {
                             toast("Join queue successfully");
-
-                        } else if(res==0)
-                        {
+                        } else if(res==0) {
                             toast("You have already joined this queue");
                         }
-                        else
-                        {
+                        else {
                             toast("Error occured");
                         }
                     }
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -307,13 +317,12 @@ public class queuing extends AppCompatActivity {
                         connection.disconnect();
                     }
                 }
-
             }
         }).start();
     }
 
 
-    private String SynWaitingTime(String UserID,String Station) {//HTTP GET Request
+    private static String SynWaitingTime(String UserID,String Station) {//HTTP GET Request
         int result = 0;
         station = Station;
         id= UserID;
@@ -323,8 +332,8 @@ public class queuing extends AppCompatActivity {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
                 try {
-                    myConnection urlbase = new myConnection();
-                    String surl = urlbase.getUrl() + "userlogin";
+                    QueueConnection urlbase = new QueueConnection();
+                    String surl = urlbase.getUrl() + "login";
                     System.out.println("surl " + surl);
                     URL url = new URL(surl);
                     connection = (HttpURLConnection) url.openConnection();
@@ -383,11 +392,7 @@ public class queuing extends AppCompatActivity {
 
 
 
-
-
-
-
-    public void main(String[] args)
+    public static void main(String args[])
     {
         while(true) {
             if (!tv_StationOne.getText().toString().equals(""))

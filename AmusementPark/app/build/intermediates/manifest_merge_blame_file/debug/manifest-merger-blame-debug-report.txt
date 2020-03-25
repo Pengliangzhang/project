@@ -27,7 +27,7 @@
 15-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:8:22-63
 16
 17    <application
-17-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:9:5-42:19
+17-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:9:5-50:19
 18        android:allowBackup="true"
 18-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:10:9-35
 19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -60,43 +60,54 @@
 32-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:22:27-74
 33            </intent-filter>
 34        </activity>
-35        <activity android:name="com.example.amusementpark.register" />
-35-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:26:9-55
-35-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:26:19-43
-36        <activity android:name="com.example.amusementpark.functions" />
-36-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:27:9-56
-36-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:27:19-44
-37        <activity android:name="com.example.amusementpark.forgetPassword" />
-37-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:28:9-61
-37-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:28:19-49
-38        <activity android:name="com.example.amusementpark.account" />
-38-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:29:9-54
-38-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:29:19-42
-39        <activity android:name="com.example.amusementpark.parking" />
-39-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:30:9-54
-39-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:30:19-42
-40        <activity android:name="com.example.amusementpark.queuing" />
-40-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:31:9-54
-40-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:31:19-42
-41        <activity android:name="com.example.amusementpark.buy_tickets" />
-41-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:34:9-58
-41-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:34:19-46
-42        <activity android:name="com.example.amusementpark.myCart" />
-42-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:35:9-53
-42-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:35:19-41
-43        <activity android:name="com.example.amusementpark.payment" />
-43-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:36:9-54
-43-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:36:19-42
-44        <activity android:name="com.example.amusementpark.paymentDone" />
-44-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:37:9-58
-44-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:37:19-46
-45        <activity android:name="com.example.amusementpark.ticket_info" />
-45-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:38:9-58
-45-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:38:19-46
-46        <activity android:name="com.blikoon.qrcodescanner.QrCodeActivity" >
-46-->[com.github.blikoon:QRCodeScanner:0.1.2] C:\Users\haoha\.gradle\caches\transforms-2\files-2.1\6153c99ec169e53e9b68ba7e224eaa59\jetified-QRCodeScanner-0.1.2\AndroidManifest.xml:15:9-16:20
-46-->[com.github.blikoon:QRCodeScanner:0.1.2] C:\Users\haoha\.gradle\caches\transforms-2\files-2.1\6153c99ec169e53e9b68ba7e224eaa59\jetified-QRCodeScanner-0.1.2\AndroidManifest.xml:15:19-74
-47        </activity>
-48    </application>
-49
-50</manifest>
+35        <activity android:name="com.example.amusementpark.queuing" >
+35-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:26:9-32:20
+35-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:26:19-42
+36            <intent-filter>
+36-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:19:13-23:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:20:17-69
+37-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:20:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:22:17-77
+39-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:22:27-74
+40            </intent-filter>
+41        </activity>
+42        <activity android:name="com.example.amusementpark.register" />
+42-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:34:9-55
+42-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:34:19-43
+43        <activity android:name="com.example.amusementpark.functions" />
+43-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:35:9-56
+43-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:35:19-44
+44        <activity android:name="com.example.amusementpark.forgetPassword" />
+44-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:36:9-61
+44-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:36:19-49
+45        <activity android:name="com.example.amusementpark.account" />
+45-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:37:9-54
+45-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:37:19-42
+46        <activity android:name="com.example.amusementpark.parking" />
+46-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:38:9-54
+46-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:38:19-42
+47        <activity android:name="com.example.amusementpark.buy_tickets" />
+47-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:42:9-58
+47-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:42:19-46
+48        <activity android:name="com.example.amusementpark.myCart" />
+48-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:43:9-53
+48-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:43:19-41
+49        <activity android:name="com.example.amusementpark.payment" />
+49-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:44:9-54
+49-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:44:19-42
+50        <activity android:name="com.example.amusementpark.paymentDone" />
+50-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:45:9-58
+50-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:45:19-46
+51        <activity android:name="com.example.amusementpark.ticket_info" />
+51-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:46:9-58
+51-->C:\Users\haoha\project\AmusementPark\app\src\main\AndroidManifest.xml:46:19-46
+52        <activity android:name="com.blikoon.qrcodescanner.QrCodeActivity" >
+52-->[com.github.blikoon:QRCodeScanner:0.1.2] C:\Users\haoha\.gradle\caches\transforms-2\files-2.1\6153c99ec169e53e9b68ba7e224eaa59\jetified-QRCodeScanner-0.1.2\AndroidManifest.xml:15:9-16:20
+52-->[com.github.blikoon:QRCodeScanner:0.1.2] C:\Users\haoha\.gradle\caches\transforms-2\files-2.1\6153c99ec169e53e9b68ba7e224eaa59\jetified-QRCodeScanner-0.1.2\AndroidManifest.xml:15:19-74
+53        </activity>
+54    </application>
+55
+56</manifest>
