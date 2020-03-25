@@ -41,6 +41,7 @@ public class account extends AppCompatActivity {
     private String sessionID;
     private String currPassword;
     private String confirmPassword;
+    private Button bt_logout;
 
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
@@ -88,6 +89,7 @@ public class account extends AppCompatActivity {
         et_curr_password = (EditText) findViewById(R.id.et_curr_password);
         et_confirm_password = (EditText) findViewById(R.id.et_confirm_password);
         bt_update_info = (Button) findViewById(R.id.bt_update_info);
+        bt_logout=(Button) findViewById(R.id.bt_logout);
 
         // receive parameter from previous page
         Intent getIntent = getIntent();
@@ -205,6 +207,14 @@ public class account extends AppCompatActivity {
                     et_confirm_password.setText("");
                     toast("Password different.");
                 }
+            }
+        });
+
+        bt_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(account.this, MainPage.class);
+                startActivity(intent);
             }
         });
     }

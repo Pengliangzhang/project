@@ -32,12 +32,12 @@
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-mdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/color-v21_abc_btn_colored_borderless_text_material.xml.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/color-v21/abc_btn_colored_borderless_text_material.xml"
-    },
-    {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_design_navigation_menu.xml.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/res/layout/design_navigation_menu.xml"
+    },
+    {
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/color-v21_abc_btn_colored_borderless_text_material.xml.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/color-v21/abc_btn_colored_borderless_text_material.xml"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
@@ -60,20 +60,20 @@
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/res/color-v23/design_tint_password_toggle.xml"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_queuing.xml.flat",
-        "source": "/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/res/layout/queuing.xml"
-    },
-    {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_bt_ic_card_dark.png.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/drawable-xhdpi-v4/bt_ic_card_dark.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_bt_card_form_fields.xml.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/layout/bt_card_form_fields.xml"
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_queuing.xml.flat",
+        "source": "/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/res/layout/queuing.xml"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_notification_template_part_time.xml.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/c0a39027978b83a483a047f5c31d0c4e/core-1.0.1/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_bt_card_form_fields.xml.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/layout/bt_card_form_fields.xml"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_bt_ic_cardholder_name_dark.png.flat",
@@ -100,16 +100,16 @@
         "source": "/Users/abble/AndroidStudioProjects/AmusementPark/app/src/main/res/drawable/backimg.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxhdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-ldrtl-xxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxxhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/color_mtrl_btn_text_color_selector.xml.flat",
@@ -144,12 +144,12 @@
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-ldrtl-hdpi-v17/abc_spinner_mtrl_am_alpha.9.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_bt_ic_diners_club.png.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/drawable-xhdpi-v4/bt_ic_diners_club.png"
-    },
-    {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable_design_password_eye.xml.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/2946ca0ea6c89dab7d7d9fbc18e54292/material-1.0.0/res/drawable/design_password_eye.xml"
+    },
+    {
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_bt_ic_diners_club.png.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/drawable-xhdpi-v4/bt_ic_diners_club.png"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/color_abc_tint_default.xml.flat",
@@ -160,12 +160,12 @@
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable/abc_ic_clear_material.xml"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable/abc_list_selector_holo_light.xml"
-    },
-    {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_bt_ic_visa.png.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/ade3db25a25db5ed1262b5fe1f223852/jetified-card-form-4.2.0/res/drawable-xxxhdpi-v4/bt_ic_visa.png"
+    },
+    {
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable_abc_list_selector_holo_light.xml.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable/abc_list_selector_holo_light.xml"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/layout_select_dialog_item_material.xml.flat",
@@ -212,12 +212,12 @@
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
         "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-mdpi-v4/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/abble/.gradle/caches/transforms-2/files-2.1/906744c4ddcbc384c5a8d2d69414f8fa/appcompat-1.0.2/res/drawable-xxxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/abble/AndroidStudioProjects/AmusementPark/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_flashlight_turn_off.png.flat",
