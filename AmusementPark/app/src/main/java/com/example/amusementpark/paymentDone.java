@@ -24,6 +24,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -34,7 +36,7 @@ import java.text.SimpleDateFormat;
 public class paymentDone extends AppCompatActivity {
     private String date,email;
     private  int value, type;
-    private Date expire;
+    private  Date expireD;
     private ArrayList<Ticket> mylist = new ArrayList<>();
 
     @Override
@@ -116,17 +118,21 @@ public class paymentDone extends AppCompatActivity {
 
 
             date = mylist.get(i).getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
-                expire = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                expireD = dateFormat.parse(date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+
+            String strD =dateFormat.format(expireD);
             email = "12345@icloud.com"; //temporary email for testing
 
-            System.out.println("++++++++++++++++++++++++:   "+value+" "+type+" "+expire+"  "+email);
+            //System.out.println("++++++++++++++++++++++++:   "+value+" "+type+" "+expire+"  "+email);
 
             //Send the info.
-            SendTicketInfo(value,type,expire,email);
+            SendTicketInfo(value,type,strD,email);
         }
 
     }
@@ -134,7 +140,7 @@ public class paymentDone extends AppCompatActivity {
 
 
     /* Send ticket info. to database */
-    private void SendTicketInfo(final int value, final int type, final Date expire, final String email){
+    private void SendTicketInfo(final int value, final int type, final String expire, final String email){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -146,7 +152,7 @@ public class paymentDone extends AppCompatActivity {
                 try{
 
                     //String str_url = "http://0d3d2083.ngrok.io/" + "buytickets";
-                    String str_url = "http://35.230.92.53/" ;
+                    String str_url = "http://35.230.92.53/buytickets" ;
                     System.out.println("str_url " + str_url);
                     URL url = new URL(str_url);
                     connection = (HttpURLConnection) url.openConnection(); // 打开和URL之间的连接
@@ -174,9 +180,12 @@ public class paymentDone extends AppCompatActivity {
 
                     out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     out.write(String.valueOf(jsonObject));
+                    //out.flush(); //++
                     out.close();
 
                     int responseCode = connection.getResponseCode();
+                    System.out.println("response code " + responseCode);
+
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         //定义 BufferedReader输入流来读取URL的响应
                          in = new BufferedReader(new InputStreamReader(connection.getInputStream(),"UTF-8"));
@@ -186,7 +195,9 @@ public class paymentDone extends AppCompatActivity {
                             result += line;
 
                         }
-                        System.out.println("whole results++++++++++++++++++++++++++++++++++++++: " + result);
+                        //in.close();//++
+
+                        System.out.println(" result: -------------------: " + result);
                         //int res = Integer.parseInt(result.substring(8, 9));
                         //int res = Integer.parseInt(result);
 
@@ -200,15 +211,19 @@ public class paymentDone extends AppCompatActivity {
                         }
 
                          */
+                    }else if (responseCode == HttpURLConnection.HTTP_BAD_REQUEST){
+                        System.out.println("FFFFFFFFFail!!!!!!!!!!");
                     }
 
 
 
 
 
-                }catch (Exception e){
+                }catch (IOException e){
                     e.printStackTrace();
-                }finally { // 使用finally块来关闭输入流
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } finally { // 使用finally块来关闭输入流
                     if(connection!=null){
                         connection.disconnect();
                     }
