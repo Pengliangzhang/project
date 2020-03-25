@@ -46,6 +46,7 @@
     <string name="cartView_textview4">Remove</string>
     <string name="cartView_textview5">Date</string>
     <string name="Empty_cart_tv">Remove all</string>
+    <string name="OrdHis_title">Booking History</string>
 
 
     <string-array name="ticketTypes">

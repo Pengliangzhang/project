@@ -1,0 +1,27 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.blikoon.qrcodescanner"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="15"
+8-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="25" />
+9-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml
+10
+11    <application
+11-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:5-11:19
+12        android:allowBackup="true"
+12-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:18-44
+13        android:label="@string/app_name"
+13-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:5:45-77
+14        android:supportsRtl="true" >
+14-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:6:9-35
+15        <activity android:name="com.blikoon.qrcodescanner.QrCodeActivity" >
+15-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:7:9-9:20
+15-->/Users/lixuanluo/Desktop/sysc4907/project/AmusementPark/qrcodescanner/src/main/AndroidManifest.xml:7:19-49
+16        </activity>
+17    </application>
+18
+19</manifest>

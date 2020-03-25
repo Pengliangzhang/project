@@ -10,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,19 +21,13 @@ import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class myCart extends AppCompatActivity {
 
-    private Button next_btn;
-    //int[] image = {R.drawable.ticket,R.drawable.ticket};
-    //String[] type = {"Student","Adult"};
-    //String[] price = {"$15","$20"};
-    //String[] remove ={"remove","remove"};
     private ArrayList<Ticket> mylist = new ArrayList<>();
-    private String ticketNumber;
-
 
 
     @Override
@@ -43,7 +36,7 @@ public class myCart extends AppCompatActivity {
         setContentView(R.layout.my_cart);
 
 
-        /* Add Step Progress Bar*/
+        /* Add Step Progress Bar */
         HorizontalStepView setpview = (HorizontalStepView) findViewById(R.id.step_view);
         List<StepBean> stepsBeanList = new ArrayList<>();
         StepBean stepBean0 = new StepBean("Summary",0);
@@ -69,28 +62,16 @@ public class myCart extends AppCompatActivity {
 
         /* Add List view in myCart*/
         ListView myListView = (ListView) findViewById(R.id.mycart_listview);
-        //ScrollView myListView = (ScrollView) findViewById(R.id.mycart_listview);
         cartAdapter adapter = new cartAdapter();
         myListView.setAdapter(adapter);
 
         //Receive parameter from previous page
-        Intent getIntent = new Intent();
-        //date = getIntent.getStringExtra("Date");
-        //type = getIntent.getStringExtra("Type");
-        //price = getIntent.getStringExtra("Price");
-
-        //Ticket ticket = new Ticket(type,date,price);
-        //ticket = (Ticket) getIntent().getSerializableExtra("Ticket");
-
+        //Intent getIntent = new Intent();
         mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
-        //System.out.println(mylist.size());
-
-
-
 
         /* Next Step Button Function*/
         //Initialize Button
-        next_btn = (Button) findViewById(R.id.next_bt1);
+        Button next_btn = (Button) findViewById(R.id.next_bt1);
 
         //Switch to next page
         next_btn.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +79,7 @@ public class myCart extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(myCart.this,payment.class);
+                intent.putExtra("mylist", mylist);
                 startActivity(intent);
             }
         });
@@ -107,7 +89,7 @@ public class myCart extends AppCompatActivity {
     /*
      * list view adapter for cart_adapter_view.xml
      */
-    class cartAdapter extends BaseAdapter{
+     class cartAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
@@ -146,9 +128,7 @@ public class myCart extends AppCompatActivity {
             ImageView t_delete = (ImageView) convertView.findViewById(R.id.listview_remove); //final
             Spinner t_numSpinner = (Spinner) convertView.findViewById(R.id.listview_num);
             ImageView t_image = (ImageView) convertView.findViewById(R.id.listview_image);
-            final Object o = getItem(position);
 
-            //System.out.println(position);
 
             t_type.setText(mylist.get(position).getType());
             System.out.println(t_type.toString());
@@ -156,14 +136,13 @@ public class myCart extends AppCompatActivity {
             t_price.setText(mylist.get(position).getPrice());
 
             t_delete.setImageResource(R.drawable.delete);
-            //t_numSpinner.setAdapter(ticketNumAdapter);
             t_image.setImageResource(R.drawable.ticket4);
 
             /*
             *  Display the same ticket number in shopping cart as selected in the previous activity.
             */
             //Number of tickets from the previous activity
-            ticketNumber = mylist.get(position).getNumber();
+            String ticketNumber = mylist.get(position).getNumber();
             //Set ticket numbers adapter
             ArrayAdapter<CharSequence> Num_adapter = ArrayAdapter.createFromResource(myCart.this, R.array.NumOfTickets, android.R.layout.simple_list_item_1);
             Num_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -183,9 +162,6 @@ public class myCart extends AppCompatActivity {
                 public void onClick(View v) {
                     mylist.remove(position);
                     refresh();
-                    //refresh2();
-
-
 
                 }
             });
@@ -207,15 +183,8 @@ public class myCart extends AppCompatActivity {
         System.out.println("my list size now: "+mylist.size());
         startActivity(intent1);
 
+
     }
 
-    /*
-    private void refresh2() {
-        finish();
-        Intent intent2 = new Intent(this, buy_tickets.class);
-        intent2.putExtra("mylist", mylist);
-        startActivity(intent2);
-    }
 
-     */
 }

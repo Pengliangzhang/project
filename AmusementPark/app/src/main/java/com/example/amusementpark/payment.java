@@ -6,26 +6,28 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import com.baoyachi.stepview.HorizontalStepView;
 import com.baoyachi.stepview.bean.StepBean;
 import com.braintreepayments.cardform.view.CardForm;
-
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class payment extends AppCompatActivity {
-    private Button confirm_bt;
 
+    private ArrayList<Ticket> mylist = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.payment);
+
+        /* Receive parameter from previous page */
+        //Intent getIntent = new Intent();
+        mylist = (ArrayList<Ticket>) getIntent().getSerializableExtra("mylist");
 
         /* Import Step Progress Bar*/
         HorizontalStepView setpview = (HorizontalStepView) findViewById(R.id.step_view2);
@@ -67,7 +69,8 @@ public class payment extends AppCompatActivity {
         cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
         /* Confirm Button Function*/
-        confirm_bt = (Button) findViewById(R.id.next_bt2);
+        Button confirm_bt = (Button) findViewById(R.id.next_bt2);
+
         //Switch to the next page if the form is completed
         confirm_bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +79,7 @@ public class payment extends AppCompatActivity {
                 if(cardForm.isValid()){
                     Intent intent = new Intent();
                     intent.setClass(payment.this,paymentDone.class);
+                    intent.putExtra("mylist", mylist);
                     startActivity(intent);
                 }else{
                     Toast.makeText(payment.this,"Please complete the form",Toast.LENGTH_LONG).show();
