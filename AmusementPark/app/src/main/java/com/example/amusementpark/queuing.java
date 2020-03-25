@@ -1,8 +1,11 @@
 package com.example.amusementpark;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,11 +42,37 @@ public class queuing extends AppCompatActivity {
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private String username;
     private static String station = null;
+
+
     private static String message;
     private static String id= null;
     private int i;
-    @Override
 
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what) {
+                case 1:
+                    toast("Cancel Successfully");
+                    break;
+                case 2:
+                    toast("Cannot find infomation in this queue");
+                    break;
+                case 3:
+                    toast("Add successfully");
+                    break;
+                case 4:
+                    toast("already in this queue");
+                    break;
+                case 5:
+                    toast("An error found");
+                    break;
+
+            }
+        }
+    };
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,19 +137,10 @@ public class queuing extends AppCompatActivity {
         bt_CancelQueueOne.setOnClickListener(new View.OnClickListener() {
                                                  @Override
                                                  public void onClick(View v) {
-                                                     if (!tv_StationTwo.getText().toString().equals("")) {
-                                                         tv_StationOne.setText(tv_StationTwo.getText().toString());
-                                                         tv_TimeOne.setText(tv_TimeTwo.getText().toString());
-                                                         tv_StationTwo.setText(tv_StationThree.getText().toString());
-                                                         tv_TimeTwo.setText(tv_TimeThree.getText().toString());
-                                                         tv_StationThree.setText("");
-                                                         tv_TimeThree.setText("");
-                                                     }
-                                                     else {
-                                                         tv_StationOne.setText("");
-                                                         tv_TimeOne.setText("");
-                                                     }
                                                      SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
+                                                     tv_StationOne.setText("");
+                                                     tv_TimeOne.setText("");
+
                                                  }
                                              }
         );
@@ -130,28 +150,21 @@ public class queuing extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                if (!tv_StationThree.getText().toString().equals("")) {
-                    tv_StationTwo.setText(tv_StationThree.getText().toString());
-                    tv_TimeTwo.setText(tv_TimeThree.getText().toString());
-                    tv_StationThree.setText("");
-                    tv_TimeThree.setText("");
-                }
-                else {
-                    tv_StationTwo.setText("");
-                    tv_TimeTwo.setText("");
-                }
                 SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
+                tv_StationTwo.setText("");
+                tv_TimeTwo.setText("");
+                }
             }
-        });
+        );
 
         // button for cancel the third queue
         bt_CancelQueueThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
+                SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
                 tv_StationThree.setText("");
                 tv_TimeThree.setText("");
-                SynCancelQueue("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
             }
         });
 
@@ -201,6 +214,7 @@ public class queuing extends AppCompatActivity {
             public void run() {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
+                Message message = handler.obtainMessage();
                 try {
                     QueueConnection urlbase= new QueueConnection();
                     String surl= urlbase.getUrl()+"dequeueFROMwait";
@@ -238,11 +252,10 @@ public class queuing extends AppCompatActivity {
                         }
                         int res = Integer.parseInt(re.substring(8, 9));
                         if (res == 1) {
-                            toast("Cancel queue successfully");
-
+                            message.what = 1;
                         } else
                         {
-                            toast("Error occured");
+                            message.what = 2;
                         }
                     }
 
@@ -254,6 +267,7 @@ public class queuing extends AppCompatActivity {
                         connection.disconnect();
                     }
                 }
+                handler.sendMessage(message);
 
             }
         }).start();
@@ -269,6 +283,7 @@ public class queuing extends AppCompatActivity {
             public void run() {
                 HttpURLConnection connection = null;
                 BufferedReader reader = null;
+                Message message = handler.obtainMessage();
                 try {
                     QueueConnection urlbase= new QueueConnection();
                     String surl= urlbase.getUrl()+"enqueue";
@@ -308,12 +323,12 @@ public class queuing extends AppCompatActivity {
                         }
                         int res = Integer.parseInt(re.substring(8, 9));
                         if (res == 1) {
-                            toast("Join queue successfully");
+                            message.what = 3;
                         } else if(res==0) {
-                            toast("You have already joined this queue");
+                            message.what = 4;
                         }
                         else {
-                            toast("Error occured");
+                            message.what = 5;
                         }
                     }
                 } catch (Exception e) {
@@ -322,7 +337,7 @@ public class queuing extends AppCompatActivity {
                     if (connection != null) {
                         connection.disconnect();
                     }
-                }
+                }handler.sendMessage(message);
             }
         }).start();
     }
