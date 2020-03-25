@@ -41,12 +41,15 @@ public class parking extends AppCompatActivity {
     private Button bt_confirm;
     private String username;
     private String sessionID;
-    private String plateNumber;
+    private static String plateNumber;
     private TextView tv_scan_qr;
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private static final int SUCCESS = 1;
     private static final int FAIL = 0;
     private boolean PASS = false;
+    private TextView tv_message;
+    private String message;
+
 
 
     @SuppressLint("HandlerLeak")
@@ -63,6 +66,8 @@ public class parking extends AppCompatActivity {
                     intent.putExtra("sessionID", sessionID);
                     intent.putExtra("plateNumber",msg.obj.toString());
                     System.out.println("message -> session ID = "+ msg.obj);
+                    message ="successful submitted plate number!";
+                    intent.putExtra("message",message);
                     startActivity(intent);
                     break;
                 case FAIL:
@@ -88,6 +93,7 @@ public class parking extends AppCompatActivity {
 
         et_plate_number = (EditText) findViewById(R.id.et_plate_number);
         bt_confirm = (Button) findViewById(R.id.bt_confirm);
+        tv_message=(TextView) findViewById(R.id.tv_message);
 
 
         // receive parameter from previous page
@@ -95,9 +101,17 @@ public class parking extends AppCompatActivity {
         username = getIntent.getStringExtra("username");
         sessionID=getIntent.getStringExtra("sessionID");
         plateNumber=getIntent.getStringExtra("plateNumber");
+        message=getIntent.getStringExtra("message");
 
+
+        //initial plate number
         if(plateNumber!=null){
             et_plate_number.setText(plateNumber);
+        }
+
+        //initial message
+        if(message!=""){
+            tv_message.setText(message);
         }
 
         System.out.println("session ID from previous page = "+ sessionID);
