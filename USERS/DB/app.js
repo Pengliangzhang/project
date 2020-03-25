@@ -15,11 +15,12 @@ const PORT = process.env.PORT || 3001;
 
 // setup cros
 var corsOptions = {
-  origin: 'http://localhost:3000, ',
+  origin: 'http://localhost:3000',
   credentials: true,
   maxAge: '900000'
 }
 app.use(cors(corsOptions))
+// app.options('*', cors(corsOptions));
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
@@ -50,14 +51,11 @@ var sess;
 
 // set up router
 app.get('/', (req, res) =>{
-    responseClient(res, 200, 0, req.session);
+    responseClient(res, 200, 0, "Thanks for using USERS DB");
 });
 
 app.get('/userInfo', (req, res)=>{
-    // console.log(req.session);
-    // if(sess != undefined){
     if(req.session.user != undefined){
-        // responseClient(res, 200, 1, sess.user);
         responseClient(res, 200, 1, req.session.user);
     }else{
         responseClient(res, 200, 0, "Please login !");
@@ -71,7 +69,7 @@ app.get('/logout', (req, res)=>{
 
 app.get('/getusertickets', (req, res) =>{
     if(req.session.user == undefined){
-        return responseClient(res, 200, 0, "unable to query data");
+        return responseClient(res, 200, 0, "unable to query data, please login first");
     }else{
       var response = TICKET.queryUserTicket(req.session.user.email);
       responseClient(res, 200, 1, response);
@@ -81,7 +79,7 @@ app.get('/getusertickets', (req, res) =>{
 
 app.get('/getqueue', (req, res) =>{
     if(req.session.user == undefined){
-        return responseClient(res, 200, 0, "unable to query data");
+        return responseClient(res, 200, 0, "unable to query data, please login first");
     }else{
       var responseIDs = QUEUE.queryUSERs(req.session.user.email);
       var response = [];
@@ -102,13 +100,13 @@ app.get('/getqueue', (req, res) =>{
             var json = {id: responseIDs.results[i].id, msg: msg}
             response[i] = json;
       }
-        
       responseClient(res, 200, 1, response);
     }
 })
 
 app.post('/login', (req, res) =>{
     var body = _.pick(req.body,["username", "ps"]);
+    console.log(body)
     if(!body.username){
         return responseClient(res, 200, 0, "user name cannot be none!");
     }
@@ -124,10 +122,6 @@ app.post('/login', (req, res) =>{
     }
     else if(response.result==1){
         req.session.user = response.user;
-        // res.setHeader("Access-Control-Allow-Origin","*");
-        // res.send({"found":"1"})
-        // sess = req.session;
-        // sess.user = response.user
         responseClient(res, 200, 1, req.session);
     }else{
         responseClient(res, 200, 0, "User name or password do not exist !");
@@ -136,6 +130,7 @@ app.post('/login', (req, res) =>{
 
 app.post('/signup', (req, res) =>{
     var body = _.pick(req.body,["ps", "username", "email"]);
+    console.log(body)
     var response = USER.insert(body);
     if(response.res==0){
         responseClient(res, 200, response.res, `Username: ${body.username} exist, please choose another one !`);
@@ -146,7 +141,10 @@ app.post('/signup', (req, res) =>{
 
 app.post('/buytickets', (req, res) =>{
     var body = _.pick(req.body,["value", "type", "expire", "email"]);
-    // body.email = "beck@beck.com";
+    console.log(body)
+    if(body.type == null || body.email==null || body.expire==null || body.value==null){
+        return responseClient(res, 200, 0, 'Please fill out required information !');
+    }
     if(req.session.user){
         body.email = req.session.user.email;
     }
@@ -160,12 +158,32 @@ app.post('/buytickets', (req, res) =>{
 
 app.post('/buyparkingspot', (req, res) =>{
     var body = _.pick(req.body,["plate"]);
+    console.log(body)
     if(req.session.user){
         body.username = req.session.user.username;
+    }else {
+        console.log(req.session.user)
+        return responseClient(res, 200, 0, "please login first !");
     }
     var response = PARKING.buyParking(body);
     if(response.result==1){
         responseClient(res, 200, response.result, "Your booked a parking spot !");
+    }else{
+        responseClient(res, 200, response.result, `Unable to process the request !`);
+    }
+});
+
+app.get('/queryparkingspot', (req, res) =>{
+    var username;
+    if(req.session.user){
+        username = req.session.user.username;
+    }else {
+        return responseClient(res, 200, 0, "please login first !");
+    }
+    var response = PARKING.queryParkingSPOT(username);
+
+    if(response.result==1){
+        responseClient(res, 200, response.result, response.response);
     }else{
         responseClient(res, 200, response.result, `Unable to process the request !`);
     }

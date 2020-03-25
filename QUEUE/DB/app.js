@@ -15,11 +15,11 @@ const PORT = process.env.PORT || 3003;
 
 // setup cros
 var corsOptions = {
-  origin: 'http://localhost:2999',
+  origin: ['http://localhost:2999'],
   credentials: true,
   maxAge: '900000'
 }
-app.use(cors(corsOptions))
+app.use(cors())
 
 // set up cookie for login
 app.use(cookieParser('express_react_cookie'));
@@ -59,15 +59,15 @@ setInterval((()=>{
 
 // set up router
 app.get('/', (req, res) =>{
-    responseClient(res, 200, 0, `Thanks for using queuing db`);;
+    responseClient(res, 200, 0, `Thanks for using QUEUE DB`);
 });
 
 app.post('/enqueue', (req, res) =>{
     var body = _.pick(req.body,["id", "facility"]);
     // body.facility:   1: program one
     //                  2: program two
+    console.log(body)
     var isNUM = /^\d+$/.test(body.id);
-
     var response = queue.enqueue(body);
     if (response.res == 1) {
         responseClient(res, 200, 1, response.result);
@@ -81,6 +81,7 @@ app.post('/enqueue', (req, res) =>{
 
 app.post('/dequeueFROMwait', (req, res) =>{
     var body = _.pick(req.body,["id", "facility"]);
+    console.log(body)
     var response = queue.dequeueFROMwait(body);
     if(response.response.affectedRows == 1){
         responseClient(res, 200, 0, "Welcome to " + body.facility);
@@ -93,7 +94,7 @@ app.post('/updateposition', (req, res) =>{
     var body = _.pick(req.body,["id", "facility"]);
     // body.facility:   1: program one
     //                  2: program two
-
+    console.log(body)
     var response = queue.updateposition(body);
     if(response >= 0){
         responseClient(res, 200, 1, response);

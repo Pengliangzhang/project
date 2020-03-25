@@ -7,6 +7,7 @@ $(document).ready(function(){
         },
         crossDomain:true,
         success: function(data) {
+            console.log(data)
             if(data.code == 1){
                 $("#admin_button_container").show();
                 
