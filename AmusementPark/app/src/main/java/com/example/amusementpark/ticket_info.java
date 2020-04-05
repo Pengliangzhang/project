@@ -60,6 +60,7 @@ public class ticket_info extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent();
                 intent.setClass(ticket_info.this,order_history.class);
+                intent.putExtra("mylist", mylist);
                 startActivity(intent);
             }
         });
