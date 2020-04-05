@@ -23,15 +23,15 @@
 
     <ListView
         android:id="@+id/ticketInfo"
-        android:layout_width="406dp"
-        android:layout_height="141dp"
+        android:layout_width="410dp"
+        android:layout_height="284dp"
         android:text="@string/ticketInfo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332" />
+        app:layout_constraintVertical_bias="0.498" />
 
     <Button
         android:id="@+id/buyTicket"
