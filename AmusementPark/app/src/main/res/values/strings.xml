@@ -10,7 +10,7 @@
     <string name="account">Account</string>
 
     <string name="StationName">Station Name</string>
-    <string name="EstimateWaitingTime">Estimated Waiting Time</string>
+    <string name="EstimateWaitingTime">Position</string>
     <string name="CancelQueue">Cancel Queueing</string>
     <string name="StationOne"></string>
     <string name="StationTwo"></string>

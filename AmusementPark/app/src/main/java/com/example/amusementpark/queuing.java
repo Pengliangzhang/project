@@ -58,7 +58,7 @@ public class queuing extends AppCompatActivity {
                     toast("Cancel Successfully");
                     break;
                 case 2:
-                    toast("Cannot find infomation in this queue");
+                    toast("Cannot find information in this queue");
                     break;
                 case 3:
                     toast("Add successfully");
@@ -251,11 +251,12 @@ public class queuing extends AppCompatActivity {
 
                         }
                         int res = Integer.parseInt(re.substring(8, 9));
-                        if (res == 1) {
-                            message.what = 1;
-                        } else
-                        {
+                        if (res == 0) {
                             message.what = 2;
+                            System.out.println("no info");
+                        } else {
+                            message.what = 1;
+                            System.out.println("cancel successfully");
                         }
                     }
 
@@ -343,7 +344,7 @@ public class queuing extends AppCompatActivity {
     }
 
 
-    private static String SynWaitingTime(String UserID,String Station) {//HTTP GET Request
+    private static String SynPosition(String UserID,String Station) {//HTTP GET Request
         int result = 0;
         station = Station;
         id= UserID;
@@ -418,13 +419,13 @@ public class queuing extends AppCompatActivity {
         while(true) {
             if (!tv_StationOne.getText().toString().equals(""))
             {
-               SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
+               SynPosition("59v7e54ook3cnxprabcdefgh",tv_StationOne.getText().toString());
             }
             if(!tv_StationTwo.getText().toString().equals("")) {
-                SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
+                SynPosition("59v7e54ook3cnxprabcdefgh",tv_StationTwo.getText().toString());
             }
             if(!tv_StationThree.getText().toString().equals("")) {
-                SynWaitingTime("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
+                SynPosition("59v7e54ook3cnxprabcdefgh",tv_StationThree.getText().toString());
             }
             System.out.println(tv_StationOne.getText().toString()+","+tv_StationTwo.getText().toString()+","+tv_StationThree.getText().toString());
         }
